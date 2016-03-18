@@ -1,1 +1,1 @@
-# danimanrique.github.io
+# Repositorio Inteligencia
