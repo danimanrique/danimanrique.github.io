@@ -6,11 +6,102 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>JUEGO DEL NUMERO</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/estiloIndex.css">
     </head>
     <body>
-        <div>TODO write content</div>
+        <input type="submit" value="Volver" onclick = "location='index.html'"/>
+        
+        <h1></h1>
+        
+        <div class="centrar margenSup">
+           
+            <label  id="numero"></label>
+            
+            <br />
+            
+            <input id="ingreso" onfocus="true">
+            
+            <script>
+                
+                var numero;  //numero aleatorio
+                var numeroIngresado = "";
+                var respuesta;
+                var resultado = new Array();
+                                
+                document.getElementById("ingreso").focus(); 
+                
+                    window.onload = function() {
+                    //document.onkeyup = muestraInformacion;
+                    document.onkeypress = ValidaSoloNumeros;
+                    //document.onkeydown = muestraInformacion;
+                    generarNumero();
+                }
+                
+                function generarNumero()
+                {
+                    var num= document.getElementById('numero');
+                    var entero = Math.floor(Math.random() * (10000 - 1000) + 1000);
+                    num.innerHTML= entero;
+                    numero=""+entero;
+                    alert(numero);
+                }
+                
+                //Función que permite solo Números
+                function ValidaSoloNumeros() {
+                    var valAscii = event.keyCode;
+                 if ((valAscii < 48) || (valAscii > 57)) 
+                        event.returnValue = false;
+                 else{
+                     numeroIngresado = numeroIngresado+String.fromCharCode(valAscii);
+                     console.log(numeroIngresado + "long: "+numeroIngresado.length);
+                     verifica();
+                 }
+                }
+
+                
+                
+               function verifica(){
+                   respuesta = document.getElementById("ingreso").value;
+                   
+                    if(numeroIngresado.length==4){
+                        muestraInformacion();
+                        event.returnValue = false;
+                        numeroIngresado = "";
+                        document.getElementById("ingreso").value="";
+                        compara();    
+                        console.log(respuesta);
+                   }
+                   //console.log(respuesta.length);
+               }
+
+              function muestraInformacion() {
+
+                var mensaje = "Numero Ingreso: " + numeroIngresado + "<br>" +
+                              "Respuesta: " ;
+
+                info.innerHTML += "<br>--------------------------------------<br>" + mensaje
+              }
+                
+              function compara(){
+                      
+                  //muestraInformacion;
+                  
+                  for(i=0; i<4 ;i++){
+                      
+                      var n = document.getElementById("numero").value;
+                      var car =respuesta.charAt(i);
+                      console.log(respuesta.charAt(i));
+                      for(j=0; j<4; j++){
+                          
+                      }                      
+                  }                 
+              }
+
+            </script>
+            <div id="info"></div>   
+        </div>
     </body>
 </html>

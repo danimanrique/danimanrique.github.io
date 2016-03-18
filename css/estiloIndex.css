@@ -1,13 +1,38 @@
 html, body {
+    background-color: lightgoldenrodyellow;
     height: 100%; /* hacer que la página llene toda la altura */
 }
 *{
-    margin: 3;  /* márgenes podrían meter la pata */
+    margin: 0.5;  /* márgenes podrían meter la pata */
 }
+a:link   
+{   
+ text-decoration:none;   /* quita subrayado a los enlaces */
+}   
 #contenidoprincipal  {
-    height: 98%;  /* empuja el pie hacia abajo */
+    height: 83%;  /* empuja el pie hacia abajo */
 }
 #piedepagina {
     height: 50px;  /* establece la altura del pie de página */
     margin-top: -50px;  /* estas cifras tienen que ser opostas */
+    text-align: right;
+    font-family: 'Merriweather';
 }
+
+.fuenteTitulo{
+    font-family: 'Merriweather';    
+}
+
+.fuente{
+    font-family: 'Lato';
+    font-size: 1.2em;
+}
+
+.centrar{
+    text-align: center;
+}
+
+.margenSup{
+    margin-top: 100px;
+}
+
