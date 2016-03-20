@@ -9,99 +9,125 @@ and open the template in the editor.
         <title>JUEGO DEL NUMERO</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/estiloIndex.css">
+        <link rel="stylesheet" href="css/estiloPrimerJuego.css">
+        <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,300italic,700italic' rel='stylesheet' type='text/css'>
     </head>
     <body>
         <input type="submit" value="Volver" onclick = "location='index.html'"/>
+        <input type="submit" value="Reiniciar" onclick="javascript:window.location.reload();"/>
         
-        <h1></h1>
-        
-        <div class="centrar margenSup">
-           
-            <label  id="numero"></label>
+        <h1 class="fuenteTitulo centrar">JUEGO DEL NÚMERO</h1>
+       
+        <div class="centrar fuente">
+            
+            <br>
+            A JUGAR!! Adiviná el número.
+            <br>
+            <label  id="numero"  ></label>
             
             <br />
             
-            <input id="ingreso" onfocus="true">
+            <input id="ingreso">
             
-            <script>
-                
-                var numero;  //numero aleatorio
-                var numeroIngresado = "";
-                var respuesta;
-                var resultado = new Array();
-                                
-                document.getElementById("ingreso").focus(); 
-                
-                    window.onload = function() {
-                    //document.onkeyup = muestraInformacion;
-                    document.onkeypress = ValidaSoloNumeros;
-                    //document.onkeydown = muestraInformacion;
-                    generarNumero();
-                }
-                
-                function generarNumero()
-                {
-                    var num= document.getElementById('numero');
-                    var entero = Math.floor(Math.random() * (10000 - 1000) + 1000);
-                    num.innerHTML= entero;
-                    numero=""+entero;
-                    alert(numero);
-                }
-                
-                //Función que permite solo Números
-                function ValidaSoloNumeros() {
-                    var valAscii = event.keyCode;
-                 if ((valAscii < 48) || (valAscii > 57)) 
-                        event.returnValue = false;
-                 else{
-                     numeroIngresado = numeroIngresado+String.fromCharCode(valAscii);
-                     console.log(numeroIngresado + "long: "+numeroIngresado.length);
-                     verifica();
-                 }
-                }
-
-                
-                
-               function verifica(){
-                   respuesta = document.getElementById("ingreso").value;
-                   
-                    if(numeroIngresado.length==4){
-                        muestraInformacion();
-                        event.returnValue = false;
-                        numeroIngresado = "";
-                        document.getElementById("ingreso").value="";
-                        compara();    
-                        console.log(respuesta);
-                   }
-                   //console.log(respuesta.length);
-               }
-
-              function muestraInformacion() {
-
-                var mensaje = "Numero Ingreso: " + numeroIngresado + "<br>" +
-                              "Respuesta: " ;
-
-                info.innerHTML += "<br>--------------------------------------<br>" + mensaje
-              }
-                
-              function compara(){
-                      
-                  //muestraInformacion;
-                  
-                  for(i=0; i<4 ;i++){
-                      
-                      var n = document.getElementById("numero").value;
-                      var car =respuesta.charAt(i);
-                      console.log(respuesta.charAt(i));
-                      for(j=0; j<4; j++){
-                          
-                      }                      
-                  }                 
-              }
-
-            </script>
             <div id="info"></div>   
         </div>
+        
+        <script>
+
+            var numero;  //numero aleatorio
+            var numeroIngresado = "";
+            var resultado = new Array(0,0,0);
+            var intentos=0;
+
+            // Para que el cursor esté en el input
+            document.getElementById("ingreso").focus(); 
+
+            // Acciones al cargar la página
+            window.onload = function() {
+                document.onkeypress = SoloNumeros;
+                generarNumero();
+            }
+
+            function generarNumero()
+            {
+                var num= document.getElementById('numero');
+                var entero = Math.floor(Math.random() * (10000 - 1000) + 1000);
+                num.innerHTML= entero;
+                numero=""+entero;
+                //alert(numero);
+            }
+
+            //Función que permite solo Números en el Input
+            function SoloNumeros() {
+                var valAscii = event.keyCode;
+                if ((valAscii < 48) || (valAscii > 57)) 
+                    event.returnValue = false; // No escribe el caracter incorrecto
+                else{
+                    numeroIngresado = numeroIngresado+String.fromCharCode(valAscii);
+                    //console.log(numeroIngresado + "long: "+numeroIngresado.length);
+                    verifica();
+                }
+            }
+
+
+            // Verifica si se ingresaron 4 dígitos y en tal caso se debe responder.
+            function verifica(){
+               
+                if(numeroIngresado.length==4){
+                    muestraRespuesta();
+                    event.returnValue = false; // No escribe el último caracter
+                    numeroIngresado = "";
+                    document.getElementById("ingreso").value=""; // Borra lo que hay en el input    
+                    //console.log(respuesta);
+               }
+               //console.log(respuesta.length);
+            }
+
+            function muestraRespuesta() {
+
+              intentos++;  
+              var gano=compara();
+              var mensaje;
+              if(gano){
+                mensaje = "Número descubierto: "+numero+"<br>GANASTE!! En "+intentos+" intento/s."
+                //Deshabilita input e ingreso por teclado
+                document.onkeypress = false;
+                document.getElementById("ingreso").disabled=true;
+              }
+              else{
+                mensaje = "Número Ingresado: " + numeroIngresado + "<br>" +
+                          "BIEN: "+resultado[0]+" - REGULAR: "+resultado[1]+" - MAL: "+resultado[2];
+
+                
+              }
+              info.innerHTML += "<br>--------------------------------------<br>" + mensaje
+            }
+
+          function compara(){
+
+              //muestraInformacion;
+              console.log(numero+" / "+numeroIngresado);  
+              for(i=0; i<4 ;i++){
+
+                  var n = document.getElementById("numero").value;
+                  var car =numeroIngresado.charAt(i);
+                  //console.log(numeroIngresado.charAt(i));
+                  for(j=0; j<4; j++){
+
+                  }                      
+              }   
+              if(numero==numeroIngresado)
+                  return true;
+              
+              return false;
+              
+          }
+
+          function reFresh(){ 
+            location.reload(true)
+          }
+
+        </script>            
     </body>
 </html>
