@@ -15,7 +15,7 @@ and open the template in the editor.
     </head>
     <body>
         <input type="submit" value="Volver" onclick = "location='index.html'"/>
-        <input type="submit" value="Reiniciar" onclick="javascript:window.location.reload();"/>
+        <input type="submit" value="Reiniciar" onclick="location='primerJuego.html'"/>
         
         <h1 class="fuenteTitulo centrar">JUEGO DEL NÚMERO</h1>
        
@@ -120,12 +120,13 @@ and open the template in the editor.
               if(numero==numeroIngresado)
                   return true;
               
+              /*
+               * if(resultado[0]==4)
+               *    return true;
+               */
+              
               return false;
               
-          }
-
-          function reFresh(){ 
-            location.reload(true)
           }
 
         </script>            
