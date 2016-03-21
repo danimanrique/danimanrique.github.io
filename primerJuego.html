@@ -23,13 +23,16 @@ and open the template in the editor.
             
             A JUGAR!! Adiviná el número!
             <br>
-            <label  id="numero" ></label>
+            <label  id="numero" hidden=""></label>
             
             <br />
             
-            <input id="ingreso">
+            <label  id="nroIngresado" ></label>
             
             <div id="info"></div>   
+        </div>
+        <div class="imagen">
+            <img class="gif" src="imagenes/aplausos.gif" hidden="" id="imagen" >
         </div>
         
         <script>
@@ -37,10 +40,7 @@ and open the template in the editor.
             var numero;  //numero aleatorio
             var numeroIngresado = "";
             var resultado = new Array(0,0,0);
-            var intentos=0;
-
-            // Para que el cursor esté en el input
-            document.getElementById("ingreso").focus(); 
+            var intentos=0; 
 
             // Acciones al cargar la página
             window.onload = function() {
@@ -60,14 +60,14 @@ and open the template in the editor.
             //Función que permite solo Números en el Input
             function SoloNumeros() {
                 var valAscii = event.keyCode;
-                
-                if ((valAscii < 48) || (valAscii > 57) || (valAscii===8)) {
-                    console.log(numeroIngresado + " borró "+numeroIngresado.length);    
-                    event.returnValue = false; // No escribe el caracter incorrecto
+                if ((valAscii < 48) || (valAscii > 57)) {
+                        console.log(numeroIngresado + " borró "+numeroIngresado.length);    
+                        event.returnValue = false; // No escribe el caracter incorrecto
                 }
                 else{
                     numeroIngresado = numeroIngresado+String.fromCharCode(valAscii);
                     console.log(numeroIngresado + " long: "+numeroIngresado.length);
+                    document.getElementById("nroIngresado").innerHTML = numeroIngresado;
                     verifica();
                 }
             }
@@ -80,7 +80,7 @@ and open the template in the editor.
                     muestraRespuesta();
                     event.returnValue = false; // No escribe el último caracter
                     numeroIngresado = "";
-                    document.getElementById("ingreso").value=""; // Borra lo que hay en el input    
+                    document.getElementById("nroIngresado").innerHTML=""; 
                     //console.log(respuesta);
                }
                //console.log(respuesta.length);
@@ -95,7 +95,8 @@ and open the template in the editor.
                 mensaje = "Número descubierto: "+numero+"<br>GANASTE!! En "+intentos+" intento/s."
                 //Deshabilita input e ingreso por teclado
                 document.onkeypress = false;
-                document.getElementById("ingreso").disabled=true;
+                document.getElementById("imagen").hidden=false;
+                document.getElementById("numero").hidden=false;
               }
               else{
                 mensaje = "Número Ingresado: " + numeroIngresado + "<br>" +
@@ -114,11 +115,11 @@ and open the template in the editor.
 
                   // MAL
                   if(numero.indexOf(numeroIngresado[i])==-1){
-                      resultado[2]=resultado[2]+1;
+                      resultado[2] = resultado[2]+1;
                   }
                   else{         
                       // BIEN
-                      if(numero.indexOf(numeroIngresado[i])==i){
+                      if(numero[i]==numeroIngresado[i]){
                          resultado[0]=resultado[0]+1;
                       }    
                       // REGULAR

@@ -16,3 +16,14 @@ html, body {
 .fuente{
     font-family: 'Lato';
 }
+
+.gif{
+    height: 100%;
+    width: 100%;
+}
+
+.imagen{
+    margin-left: 20%;
+    margin-right: 20%;
+    
+}
