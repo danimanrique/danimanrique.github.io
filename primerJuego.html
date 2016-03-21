@@ -22,9 +22,9 @@ and open the template in the editor.
         <div class="centrar fuente">
             
             <br>
-            A JUGAR!! Adiviná el número.
+            A JUGAR!! Adiviná el número!
             <br>
-            <label  id="numero"  ></label>
+            <label  id="numero" ></label>
             
             <br />
             
@@ -61,11 +61,14 @@ and open the template in the editor.
             //Función que permite solo Números en el Input
             function SoloNumeros() {
                 var valAscii = event.keyCode;
-                if ((valAscii < 48) || (valAscii > 57)) 
+                
+                if ((valAscii < 48) || (valAscii > 57) || (valAscii===8)) {
+                    console.log(numeroIngresado + " borró "+numeroIngresado.length);    
                     event.returnValue = false; // No escribe el caracter incorrecto
+                }
                 else{
                     numeroIngresado = numeroIngresado+String.fromCharCode(valAscii);
-                    //console.log(numeroIngresado + "long: "+numeroIngresado.length);
+                    console.log(numeroIngresado + " long: "+numeroIngresado.length);
                     verifica();
                 }
             }
@@ -105,17 +108,24 @@ and open the template in the editor.
             }
 
           function compara(){
-
-              //muestraInformacion;
+              resultado = new Array(0,0,0);
+                            
               console.log(numero+" / "+numeroIngresado);  
               for(i=0; i<4 ;i++){
 
-                  var n = document.getElementById("numero").value;
+                  /*var n = document.getElementById("numero").value;
                   var car =numeroIngresado.charAt(i);
                   //console.log(numeroIngresado.charAt(i));
                   for(j=0; j<4; j++){
+                      
+                        
 
-                  }                      
+                  } */
+                  console.log("Numero hecho string: "+numero.toString());
+                  if(numero.indexOf(numeroIngresado[i])==-1){
+                      resultado[3]=resultado[3]+1;
+                  }
+                  
               }   
               if(numero==numeroIngresado)
                   return true;

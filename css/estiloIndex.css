@@ -21,6 +21,8 @@ a:link
 
 .fuenteTitulo{
     font-family: 'Merriweather';    
+    text-transform: uppercase;
+    text-shadow: #2d2f2d 2px 2px 4px;
 }
 
 .fuente{
