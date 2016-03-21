@@ -21,7 +21,6 @@ and open the template in the editor.
        
         <div class="centrar fuente">
             
-            <br>
             A JUGAR!! Adiviná el número!
             <br>
             <label  id="numero" ></label>
@@ -113,19 +112,20 @@ and open the template in the editor.
               console.log(numero+" / "+numeroIngresado);  
               for(i=0; i<4 ;i++){
 
-                  /*var n = document.getElementById("numero").value;
-                  var car =numeroIngresado.charAt(i);
-                  //console.log(numeroIngresado.charAt(i));
-                  for(j=0; j<4; j++){
-                      
-                        
-
-                  } */
-                  console.log("Numero hecho string: "+numero.toString());
+                  // MAL
                   if(numero.indexOf(numeroIngresado[i])==-1){
-                      resultado[3]=resultado[3]+1;
+                      resultado[2]=resultado[2]+1;
                   }
-                  
+                  else{         
+                      // BIEN
+                      if(numero.indexOf(numeroIngresado[i])==i){
+                         resultado[0]=resultado[0]+1;
+                      }    
+                      // REGULAR
+                      else{
+                         resultado[1]=resultado[1]+1;
+                      }
+                  }
               }   
               if(numero==numeroIngresado)
                   return true;
