@@ -21,7 +21,7 @@ Parámetros:
 		El cuarto parámetro es una cadena vacía, este es el id del elemento DOM.
 		El último parámetro es un objeto que contiene cuatro referencias de funciones esenciales de Phaser.
 */			   
-var game = new Phaser.Game(1100, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(1100, 600, Phaser.AUTO, 'juego', { preload: preload, create: create, update: update });
                          //800x600 original - 1366x643 mi máquina
 function preload() {
     game.load.image('sky', 'assets/pared2.png');
@@ -182,7 +182,7 @@ function create() {
         
         var foco1 = faroles.create(310,275, 'focoo');
         
-        foco1.body.inmovable = true;
+        foco1.body.inmovable = true; 
 }
 
 
@@ -267,6 +267,6 @@ function actualizaContador() {
 }
 
 </script>
-
+<div id="juego" style="width: 1100px;margin: auto;margin-top: 2%;"></div>
 </body>
 </html>
