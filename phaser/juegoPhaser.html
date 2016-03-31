@@ -44,6 +44,7 @@ function preload() {
     game.load.image('ventana9', 'assets/ventanas/arriba-ventana.png');
     game.load.image('ventana10', 'assets/ventanas/arriba-ventana.png');
     game.load.image('ventana11', 'assets/ventanas/arriba-ventana.png');
+    game.load.image('focoo', 'assets/faroles/luz-focos.png');
 }
 
 var player;
@@ -56,6 +57,7 @@ var ultimo = 'right';
 var contador = 0;
 var texto=0;
 var ventanas;
+var faroles;
 
 function create() {
 
@@ -148,17 +150,18 @@ function create() {
         
         ventanas.enableBody = true;
         
-        var ventana1 = cajones.create(605, 300, 'ventana1');
-        var ventana2 = cajones.create(56, 370, 'ventana2');
-        var ventana3 = cajones.create(98, 105, 'ventana3');
-        var ventana4 = cajones.create(605, 300, 'ventana4');
-        var ventana5 = cajones.create(605, 300, 'ventana5');
-        var ventana6 = cajones.create(605, 300, 'ventana6');
-        var ventana7 = cajones.create(605, 300, 'ventana7');
-        var ventana8 = cajones.create(605, 300, 'ventana8');
-        var ventana9 = cajones.create(605, 300, 'ventana9');
-        var ventana10 = cajones.create(605, 300, 'ventana10');
-        var ventana11 = cajones.create(605, 300, 'ventana11');
+        var ventana1 = ventanas.create(605, 300, 'ventana1');
+        var ventana2 = ventanas.create(56, 370, 'ventana2');
+        var ventana3 = ventanas.create(98, 105, 'ventana3');
+        var ventana4 = ventanas.create(605, 300, 'ventana4');
+        var ventana5 = ventanas.create(605, 300, 'ventana5');
+        var ventana6 = ventanas.create(605, 300, 'ventana6');
+        var ventana7 = ventanas.create(605, 300, 'ventana7');
+        var ventana8 = ventanas.create(605, 300, 'ventana8');
+        var ventana9 = ventanas.create(605, 300, 'ventana9');
+        var ventana10 = ventanas.create(605, 300, 'ventana10');
+        var ventana11 = ventanas.create(605, 300, 'ventana11');
+   
   
         ventana1.body.immovable = true;
         ventana2.body.immovable = true;
@@ -170,7 +173,16 @@ function create() {
         ventana8.body.immovable = true;
         ventana9.body.immovable = true;
         ventana10.body.immovable = true;
-        ventana11.body.immovable = true;
+        ventana11.body.immovable = true; 
+        
+        
+        faroles = game.add.group();
+        
+        faroles.enableBody = true;
+        
+        var foco1 = faroles.create(310,275, 'focoo');
+        
+        foco1.body.inmovable = true;
 }
 
 
@@ -182,6 +194,8 @@ function update() {
     game.physics.arcade.collide(stars, cajones);
     game.physics.arcade.collide(player, ventanas);
     game.physics.arcade.collide(stars, ventanas);
+    game.physics.arcade.collide(player, faroles);
+    game.physics.arcade.collide(stars, faroles);
     
     //  Reset the players velocity (movement)
     player.body.velocity.x = 0;
