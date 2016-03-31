@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+	<title>Juego Phaser</title>
+	<script type="text/javascript" src="js/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+/*Creación del objeto Phaser Game.
+Parámetros: 
+		Ancho y alto ("tamaño" del juego).
+		El tercer parámetro puede ser Phaser.CANVAS, Phaser.WEBGL, o Phaser.AUTO. Este es el contexto de representación que desea utilizar.
+		El cuarto parámetro es una cadena vacía, este es el id del elemento DOM.
+		El último parámetro es un objeto que contiene cuatro referencias de funciones esenciales de Phaser.
+*/			   
+var game = new Phaser.Game(1100, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+                         //800x600 original - 1366x643 mi máquina
+function preload() {
+    game.load.image('sky', 'assets/pared2.png');
+    game.load.image('ground', 'assets/calle.png');
+    game.load.image('vereda', 'assets/vereda.png');
+    game.load.image('star', 'assets/nota2.png');
+    game.load.image('detalle', 'assets/pantalla-juego.png');
+    game.load.spritesheet('dude', 'assets/chico.png', 56, 56);
+    game.load.image('cajones1', 'assets/cajones/cajones1.png');
+    game.load.image('cajones2', 'assets/cajones/cajones2.png');
+    game.load.image('cajones3', 'assets/cajones/cajones3.png');
+    game.load.image('ventana1', 'assets/ventanas/arriba-ventana.png');
+    game.load.image('ventana2', 'assets/ventanas/baranda3.png');
+    game.load.image('ventana3', 'assets/ventanas/baranda.png');
+    game.load.image('ventana4', 'assets/ventanas/arriba-ventana.png');
+    game.load.image('ventana5', 'assets/ventanas/arriba-ventana.png');
+    game.load.image('ventana6', 'assets/ventanas/arriba-ventana.png');
+    game.load.image('ventana7', 'assets/ventanas/arriba-ventana.png');
+    game.load.image('ventana8', 'assets/ventanas/arriba-ventana.png');
+    game.load.image('ventana9', 'assets/ventanas/arriba-ventana.png');
+    game.load.image('ventana10', 'assets/ventanas/arriba-ventana.png');
+    game.load.image('ventana11', 'assets/ventanas/arriba-ventana.png');
+}
+
+var player;
+var platforms;
+var cajones;
+var cursors;
+var score = 0;
+var puntosText;
+var ultimo = 'right';
+var contador = 0;
+var texto=0;
+var ventanas;
+
+function create() {
+
+    //  We're going to be using physics, so enable the Arcade Physics system
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+
+    //  Agrega el fondo el cielo como fondo
+    game.add.sprite(0, 0, 'sky');
+
+    //  Crea un grupo donde se van a agregar el suelo y dos plataformas.
+    platforms = game.add.group();
+
+    //  We will enable physics for any object that is created in this group
+    platforms.enableBody = true;
+
+    // Crea el suelo
+    var ground = platforms.create(0, game.world.height - 133, 'ground');
+
+    //  Indica que el suelo es inamovible.
+    ground.body.immovable = true;
+
+    // Crea el jugador
+    player = game.add.sprite(32, game.world.height - 200, 'dude');
+    
+    //  We need to enable physics on the player
+    game.physics.arcade.enable(player);
+
+    //  Player physics properties. Give the little guy a slight bounce.
+    // Revote al caer
+    player.body.bounce.y = 0;
+    // Fuerza de gravedad, influye en salto
+    player.body.gravity.y = 600; //300
+	// Para que se vaya o no de cuadro 
+    player.body.collideWorldBounds = true;
+
+    //  Animaciones para cuando camina
+    player.animations.add('left', [0, 1, 2, 3,4], 10, true);
+    player.animations.add('right', [5, 6, 7, 8, 9], 10, true);
+	
+    //  Los controles.
+    cursors = game.input.keyboard.createCursorKeys();
+	
+    // Estrellas	
+    stars = game.add.group();
+
+    stars.enableBody = true;
+
+    //  Here we'll create 12 of them evenly spaced apart
+    for (var i = 0; i < 12; i++)
+    {
+        //  Create a star inside of the 'stars' group
+        var star = stars.create(i * 70, 0, 'star');
+
+        //  Let gravity do its thing
+        star.body.gravity.y = 30;
+
+        //  This just gives each star a slightly random bounce value
+        star.body.bounce.y = 0.2 + Math.random() * 0.2;
+    }
+	// Detalle donde se encuentra el progreso del juego
+        var detalle = platforms.create(game.world.width - 135, 1, 'detalle');
+        detalle.body.immovable = true;
+        
+        // Puntos y Tiempo
+        texto = game.add.text(game.world.width - 128, 3, 'Tiempo: 0', { fill: '#FCF1D9'});
+        texto.fontSize = '20px';
+        texto.font = 'Arial';
+        texto.fontWeight = 'bold';
+        
+        game.time.events.loop(Phaser.Timer.SECOND, actualizaContador, this);
+	puntosText = game.add.text(game.world.width - 127, 31, 'Puntos: 0', { fill: '#FCF1D9' });
+	puntosText.fontSize = '20px';
+        puntosText.font = 'Arial';
+        puntosText.fontWeight = 'bold';
+	
+        // Cajones... Mejorar los bordes!!!
+        cajones = game.add.group();
+        
+        cajones.enableBody = true;
+        
+        var c1 = cajones.create(490, 348, 'cajones3');
+        var c2 = cajones.create(454, 383, 'cajones2');
+        var c3 = cajones.create(423, 410, 'cajones1');
+        
+        c1.body.immovable = true;
+        c2.body.immovable = true;
+        c3.body.immovable = true;
+        
+        ventanas = game.add.group();
+        
+        ventanas.enableBody = true;
+        
+        var ventana1 = cajones.create(605, 300, 'ventana1');
+        var ventana2 = cajones.create(56, 370, 'ventana2');
+        var ventana3 = cajones.create(98, 105, 'ventana3');
+        var ventana4 = cajones.create(605, 300, 'ventana4');
+        var ventana5 = cajones.create(605, 300, 'ventana5');
+        var ventana6 = cajones.create(605, 300, 'ventana6');
+        var ventana7 = cajones.create(605, 300, 'ventana7');
+        var ventana8 = cajones.create(605, 300, 'ventana8');
+        var ventana9 = cajones.create(605, 300, 'ventana9');
+        var ventana10 = cajones.create(605, 300, 'ventana10');
+        var ventana11 = cajones.create(605, 300, 'ventana11');
+  
+        ventana1.body.immovable = true;
+        ventana2.body.immovable = true;
+        ventana3.body.immovable = true;
+        ventana4.body.immovable = true;
+        ventana5.body.immovable = true;
+        ventana6.body.immovable = true;
+        ventana7.body.immovable = true;
+        ventana8.body.immovable = true;
+        ventana9.body.immovable = true;
+        ventana10.body.immovable = true;
+        ventana11.body.immovable = true;
+}
+
+
+function update() {
+
+    // Collide the player and the stars with the platforms. Para que al colisionar con el suelo o las plataformas no las "traspase" y quede en la superficie.
+    game.physics.arcade.collide(player, platforms);
+    game.physics.arcade.collide(player, cajones);
+    game.physics.arcade.collide(stars, cajones);
+    game.physics.arcade.collide(player, ventanas);
+    game.physics.arcade.collide(stars, ventanas);
+    
+    //  Reset the players velocity (movement)
+    player.body.velocity.x = 0;
+     
+    // MOVIMIENTOS
+    if (cursors.left.isDown)
+    {
+        //  Move to the left
+        player.body.velocity.x = -150;
+
+        player.animations.play('left');
+        
+        ultimo = 'left';
+        
+    }
+    else 
+		if (cursors.right.isDown)
+		{
+			//  Move to the right
+			player.body.velocity.x = 150;
+
+			player.animations.play('right');
+                          
+                        ultimo = 'right';
+		}
+		else
+		{
+			// Se queda quieto y debe quedarse "parado"
+			player.animations.stop();
+			
+                        //console.log(ultimo);
+                        
+                        if(ultimo === 'right'){
+                            // Cuando para "mira" .
+                            player.frame = 5;
+                        }
+                        else{
+                             player.frame = 4;
+                        }
+		}
+
+    //  Allow the player to jump if they are touching the ground.
+    if (cursors.up.isDown && player.body.touching.down)
+    {
+		//velocidad de salto
+        player.body.velocity.y = -300;
+    }
+
+	game.physics.arcade.collide(stars, platforms);
+	
+	game.physics.arcade.overlap(player, stars, collectStar, null, this);
+	
+}
+
+function collectStar (player, star) {
+
+    // Removes the star from the screen
+    star.kill();
+	
+	//  Add and update the score
+    score += 10;
+    puntosText.text = 'Puntos: ' + score;
+
+}
+
+function actualizaContador() {
+    contador++;
+    texto.setText('Tiempo: ' + contador);
+}
+
+</script>
+
+</body>
+</html>
