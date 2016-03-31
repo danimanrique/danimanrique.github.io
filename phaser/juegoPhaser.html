@@ -30,21 +30,24 @@ function preload() {
     game.load.image('star', 'assets/nota2.png');
     game.load.image('detalle', 'assets/pantalla-juego.png');
     game.load.spritesheet('dude', 'assets/chico.png', 56, 56);
+    
     game.load.image('cajones1', 'assets/cajones/cajones1.png');
     game.load.image('cajones2', 'assets/cajones/cajones2.png');
     game.load.image('cajones3', 'assets/cajones/cajones3.png');
-    game.load.image('ventana1', 'assets/ventanas/arriba-ventana.png');
+    
+    game.load.image('ventana1', 'assets/ventanas/baranda2.png');
     game.load.image('ventana2', 'assets/ventanas/baranda3.png');
     game.load.image('ventana3', 'assets/ventanas/baranda.png');
-    game.load.image('ventana4', 'assets/ventanas/arriba-ventana.png');
-    game.load.image('ventana5', 'assets/ventanas/arriba-ventana.png');
-    game.load.image('ventana6', 'assets/ventanas/arriba-ventana.png');
+    game.load.image('ventana4', 'assets/ventanas/baranda.png');
+    game.load.image('ventana5', 'assets/ventanas/baranda3.png');
+    game.load.image('ventana6', 'assets/ventanas/arriba-ventana4.png');
     game.load.image('ventana7', 'assets/ventanas/arriba-ventana.png');
-    game.load.image('ventana8', 'assets/ventanas/arriba-ventana.png');
-    game.load.image('ventana9', 'assets/ventanas/arriba-ventana.png');
-    game.load.image('ventana10', 'assets/ventanas/arriba-ventana.png');
-    game.load.image('ventana11', 'assets/ventanas/arriba-ventana.png');
-    game.load.image('focoo', 'assets/faroles/luz-focos.png');
+    game.load.image('ventana8', 'assets/ventanas/baranda2.png');
+    game.load.image('ventana9', 'assets/ventanas/baranda3.png');
+    game.load.image('ventana10', 'assets/ventanas/baranda.png');
+    game.load.image('ventana11', 'assets/ventanas/baranda3.png');
+    game.load.image('ventana12', 'assets/faroles/luz-focos.png'); // foco
+    game.load.image('farol', 'assets/faroles/farol.png'); 
 }
 
 var player;
@@ -105,11 +108,10 @@ function create() {
 
     stars.enableBody = true;
 
-    //  Here we'll create 12 of them evenly spaced apart
+    //  Notas aleatorias
     for (var i = 0; i < 12; i++)
     {
-        //  Create a star inside of the 'stars' group
-        var star = stars.create(i * 70, 0, 'star');
+        var star = stars.create(i * 65, 0, 'star');
 
         //  Let gravity do its thing
         star.body.gravity.y = 30;
@@ -117,7 +119,20 @@ function create() {
         //  This just gives each star a slightly random bounce value
         star.body.bounce.y = 0.2 + Math.random() * 0.2;
     }
-	// Detalle donde se encuentra el progreso del juego
+    
+    // Otras notas
+    var star1 = stars.create(12 * 65, 0, 'star');
+    var star2 = stars.create(13 * 65, 0, 'star');
+    var star3 = stars.create(110, 120, 'star');
+
+    star1.body.gravity.y = 30;
+    star1.body.bounce.y = 0.2 + Math.random() * 0.2;
+    star2.body.gravity.y = 30;
+    star2.body.bounce.y = 0.2 + Math.random() * 0.2;
+    star3.body.gravity.y = 30;
+    star3.body.bounce.y = 0.2 + Math.random() * 0.2;
+	
+        // Detalle donde se encuentra el progreso del juego
         var detalle = platforms.create(game.world.width - 135, 1, 'detalle');
         detalle.body.immovable = true;
         
@@ -150,17 +165,18 @@ function create() {
         
         ventanas.enableBody = true;
         
-        var ventana1 = ventanas.create(605, 300, 'ventana1');
+        var ventana1 = ventanas.create(7, 220, 'ventana1');
         var ventana2 = ventanas.create(56, 370, 'ventana2');
         var ventana3 = ventanas.create(98, 105, 'ventana3');
-        var ventana4 = ventanas.create(605, 300, 'ventana4');
-        var ventana5 = ventanas.create(605, 300, 'ventana5');
-        var ventana6 = ventanas.create(605, 300, 'ventana6');
+        var ventana4 = ventanas.create(195, 232, 'ventana4');
+        var ventana5 = ventanas.create(340, 172, 'ventana5');
+        var ventana6 = ventanas.create(493, 149, 'ventana6');
         var ventana7 = ventanas.create(605, 300, 'ventana7');
-        var ventana8 = ventanas.create(605, 300, 'ventana8');
-        var ventana9 = ventanas.create(605, 300, 'ventana9');
-        var ventana10 = ventanas.create(605, 300, 'ventana10');
-        var ventana11 = ventanas.create(605, 300, 'ventana11');
+        var ventana8 = ventanas.create(597, 102, 'ventana8');
+        var ventana9 = ventanas.create(697, 217, 'ventana9');
+        //var ventana10 = ventanas.create(780, 30, 'ventana10');
+        var ventana11 = ventanas.create(849, 308, 'ventana11');
+        var ventana12 = ventanas.create(310, 275, 'ventana12');
    
   
         ventana1.body.immovable = true;
@@ -172,17 +188,19 @@ function create() {
         ventana7.body.immovable = true;
         ventana8.body.immovable = true;
         ventana9.body.immovable = true;
-        ventana10.body.immovable = true;
-        ventana11.body.immovable = true; 
+        //ventana10.body.immovable = true;
+        ventana11.body.immovable = true;
+        ventana12.body.immovable = true;  
         
         
         faroles = game.add.group();
         
-        faroles.enableBody = true;
+        faroles.enableBody = true; 
         
-        var foco1 = faroles.create(310,275, 'focoo');
+        var farol = faroles.create(240, 100, 'farol');
         
-        foco1.body.inmovable = true; 
+        farol.body.immovable = true;
+        
 }
 
 
@@ -195,7 +213,6 @@ function update() {
     game.physics.arcade.collide(player, ventanas);
     game.physics.arcade.collide(stars, ventanas);
     game.physics.arcade.collide(player, faroles);
-    game.physics.arcade.collide(stars, faroles);
     
     //  Reset the players velocity (movement)
     player.body.velocity.x = 0;
