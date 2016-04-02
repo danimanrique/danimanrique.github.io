@@ -226,11 +226,7 @@ function create() {
     farol.body.immovable = true;
 
 
-    // Música
-    music = game.add.audio('musica');
-    music.play();
-    boton = game.add.button(6, 6, 'boton', click, this);
-    boton.frame = 0;
+   
     
     
     // Escalones y chica, se ven recien cuando terminan de recolectar las notas
@@ -241,6 +237,12 @@ function create() {
     chicaG.enableBody = true;
     beso = game.add.sprite(0,0, 'beso');
     beso.visible = false;
+
+     // Música
+    music = game.add.audio('musica');
+    music.play();
+    boton = game.add.button(6, 6, 'boton', click, this);
+    boton.frame = 0;
 }
 
 
