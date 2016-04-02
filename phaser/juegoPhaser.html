@@ -54,7 +54,7 @@ function preload() {
     game.load.image('vent-abierta', 'assets/ventanas/ventana-abierta.png'); 
     
     game.load.image('chica', 'assets/chica.png');
-    game.load.image('escalon', 'assets/escalon.png');
+    game.load.image('escalon', 'assets/notaVerde.png');
     game.load.image('beso', 'assets/gano.jpg');
         
     //game.load.audio('musica', 'assets/audio/jazz.mp3');
@@ -80,6 +80,7 @@ var music;
 var boton;
 var escalera;
 var beso;
+var chica;
 
 
 function create() {
@@ -226,9 +227,6 @@ function create() {
     farol.body.immovable = true;
 
 
-   
-    
-    
     // Escalones y chica, se ven recien cuando terminan de recolectar las notas
     escalera = game.add.group();
     escalera.enableBody = true;
@@ -238,11 +236,18 @@ function create() {
     beso = game.add.sprite(0,0, 'beso');
     beso.visible = false;
 
+
+    chica = game.add.sprite(857, 27, 'chica');
+    chica.visible = false;
+    game.physics.enable( [ player, chica ], Phaser.Physics.ARCADE);
+
      // Música
     music = game.add.audio('musica');
     music.play();
     boton = game.add.button(6, 6, 'boton', click, this);
     boton.frame = 0;
+    
+
 }
 
 
@@ -256,7 +261,11 @@ function update() {
     game.physics.arcade.collide(stars, ventanas);
     game.physics.arcade.collide(player, faroles);
     game.physics.arcade.collide(player, escalera);
-    game.physics.arcade.overlap(player, chicaG, ganar, null, this);
+    //game.physics.arcade.overlap(player, chicaG, ganar, null, this);
+    
+    // chica chico
+    game.physics.arcade.collide(player, chica, ganar, null, this);
+    
     
     //  Reset the players velocity (movement)
     player.body.velocity.x = 0;
@@ -307,18 +316,24 @@ function update() {
 
 	game.physics.arcade.collide(stars, platforms);
 	
-	game.physics.arcade.overlap(player, stars, collectStar, null, this);
+	game.physics.arcade.overlap(player, stars, tomaNota, null, this);
 	
 }
 
 var cantNotas=0;
 
-function collectStar (player, star) {
+function tomaNota (player, nota) {
 
-    star.kill();
+    nota.kill();
     cantNotas ++;
     score += 10;
     puntosText.text = 'Puntos: ' + score;
+    
+    var note = game.add.sprite(1025,579 - 31*cantNotas,'star'); // 1011x580
+    if(cantNotas%2 == 0)
+        note.angle = 20;
+    else
+        note.angle = 40;
     
     if(cantNotas === 15){
         
@@ -341,8 +356,6 @@ function actualizaContador() {
     
 }
 
-var chicaG;
-
 function apareceChica(){
 
     // Aparece ventana  
@@ -353,8 +366,9 @@ function apareceChica(){
     ventana10.body.immovable = true;
 
     // Aparece chica
-    var chica = chicaG.create(857, 27, 'chica');
+    chica.visible = true;
     chica.body.immovable = true;
+
     
     // Aparece "escalera"   
     var escalon1 = escalera.create(775, 165, 'escalon');
