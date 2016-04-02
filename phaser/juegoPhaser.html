@@ -4,11 +4,14 @@
 	<meta charset="UTF-8" />
 	<title>Juego Phaser</title>
 	<script type="text/javascript" src="js/phaser.min.js"></script>
-    <style type="text/css">
-        body {
-            margin: 0;
-        }
-    </style>
+        <style type="text/css">
+            body {
+                margin: 0; 
+                background: #333;
+            }
+            
+        </style>
+        
 </head>
 <body>
 
@@ -26,7 +29,6 @@ var game = new Phaser.Game(1100, 600, Phaser.AUTO, 'juego', { preload: preload, 
 function preload() {
     game.load.image('sky', 'assets/pared2.png');
     game.load.image('ground', 'assets/calle.png');
-    game.load.image('vereda', 'assets/vereda.png');
     game.load.image('star', 'assets/nota2.png');
     game.load.image('detalle', 'assets/pantalla-juego.png');
     game.load.spritesheet('dude', 'assets/chico.png', 56, 56);
@@ -46,8 +48,20 @@ function preload() {
     game.load.image('ventana9', 'assets/ventanas/baranda3.png');
     game.load.image('ventana10', 'assets/ventanas/baranda.png');
     game.load.image('ventana11', 'assets/ventanas/baranda3.png');
+    
     game.load.image('ventana12', 'assets/faroles/luz-focos.png'); // foco
     game.load.image('farol', 'assets/faroles/farol.png'); 
+    game.load.image('vent-abierta', 'assets/ventanas/ventana-abierta.png'); 
+    
+    game.load.image('chica', 'assets/chica.png');
+    game.load.image('escalon', 'assets/escalon.png');
+    game.load.image('beso', 'assets/gano.jpg');
+        
+    //game.load.audio('musica', 'assets/audio/jazz.mp3');
+    game.load.audio('musica', 'assets/audio/blues-rapido2.mp3');
+    game.load.spritesheet('boton', 'assets/audio/boton-musica.png', 36, 34);
+    
+    
 }
 
 var player;
@@ -61,6 +75,12 @@ var contador = 0;
 var texto=0;
 var ventanas;
 var faroles;
+var ventAbierta;
+var music;
+var boton;
+var escalera;
+var beso;
+
 
 function create() {
 
@@ -82,6 +102,12 @@ function create() {
     //  Indica que el suelo es inamovible.
     ground.body.immovable = true;
 
+    
+    // Ventana que aparece al conseguir las estrellas, permanece oculta hasta ese momento
+    ventAbierta = game.add.sprite(807, 28, 'vent-abierta');
+    ventAbierta.visible = false;
+    
+    
     // Crea el jugador
     player = game.add.sprite(32, game.world.height - 200, 'dude');
     
@@ -118,6 +144,7 @@ function create() {
 
         //  This just gives each star a slightly random bounce value
         star.body.bounce.y = 0.2 + Math.random() * 0.2;
+        
     }
     
     // Otras notas
@@ -132,75 +159,88 @@ function create() {
     star3.body.gravity.y = 30;
     star3.body.bounce.y = 0.2 + Math.random() * 0.2;
 	
-        // Detalle donde se encuentra el progreso del juego
-        var detalle = platforms.create(game.world.width - 135, 1, 'detalle');
-        detalle.body.immovable = true;
-        
-        // Puntos y Tiempo
-        texto = game.add.text(game.world.width - 128, 3, 'Tiempo: 0', { fill: '#FCF1D9'});
-        texto.fontSize = '20px';
-        texto.font = 'Arial';
-        texto.fontWeight = 'bold';
-        
-        game.time.events.loop(Phaser.Timer.SECOND, actualizaContador, this);
-	puntosText = game.add.text(game.world.width - 127, 31, 'Puntos: 0', { fill: '#FCF1D9' });
-	puntosText.fontSize = '20px';
-        puntosText.font = 'Arial';
-        puntosText.fontWeight = 'bold';
-	
-        // Cajones... Mejorar los bordes!!!
-        cajones = game.add.group();
-        
-        cajones.enableBody = true;
-        
-        var c1 = cajones.create(490, 348, 'cajones3');
-        var c2 = cajones.create(454, 383, 'cajones2');
-        var c3 = cajones.create(423, 410, 'cajones1');
-        
-        c1.body.immovable = true;
-        c2.body.immovable = true;
-        c3.body.immovable = true;
-        
-        ventanas = game.add.group();
-        
-        ventanas.enableBody = true;
-        
-        var ventana1 = ventanas.create(7, 220, 'ventana1');
-        var ventana2 = ventanas.create(56, 370, 'ventana2');
-        var ventana3 = ventanas.create(98, 105, 'ventana3');
-        var ventana4 = ventanas.create(195, 232, 'ventana4');
-        var ventana5 = ventanas.create(340, 172, 'ventana5');
-        var ventana6 = ventanas.create(493, 149, 'ventana6');
-        var ventana7 = ventanas.create(605, 300, 'ventana7');
-        var ventana8 = ventanas.create(597, 102, 'ventana8');
-        var ventana9 = ventanas.create(697, 217, 'ventana9');
-        //var ventana10 = ventanas.create(780, 30, 'ventana10');
-        var ventana11 = ventanas.create(849, 308, 'ventana11');
-        var ventana12 = ventanas.create(310, 275, 'ventana12');
-   
-  
-        ventana1.body.immovable = true;
-        ventana2.body.immovable = true;
-        ventana3.body.immovable = true;
-        ventana4.body.immovable = true;
-        ventana5.body.immovable = true;
-        ventana6.body.immovable = true;
-        ventana7.body.immovable = true;
-        ventana8.body.immovable = true;
-        ventana9.body.immovable = true;
-        //ventana10.body.immovable = true;
-        ventana11.body.immovable = true;
-        ventana12.body.immovable = true;  
-        
-        
-        faroles = game.add.group();
-        
-        faroles.enableBody = true; 
-        
-        var farol = faroles.create(240, 100, 'farol');
-        
-        farol.body.immovable = true;
-        
+    // Detalle donde se encuentra el progreso del juego
+    var detalle = platforms.create(game.world.width - 135, 1, 'detalle');
+    detalle.body.immovable = true;
+
+    // Puntos y Tiempo
+    texto = game.add.text(game.world.width - 128, 3, 'Tiempo: 0', { fill: '#FCF1D9'});
+    texto.fontSize = '20px';
+    texto.font = 'Arial';
+    texto.fontWeight = 'bold';
+
+    game.time.events.loop(Phaser.Timer.SECOND, actualizaContador, this);
+    puntosText = game.add.text(game.world.width - 127, 31, 'Puntos: 0', { fill: '#FCF1D9' });
+    puntosText.fontSize = '20px';
+    puntosText.font = 'Arial';
+    puntosText.fontWeight = 'bold';
+
+    // Cajones... Mejorar los bordes!!!
+    cajones = game.add.group();
+
+    cajones.enableBody = true;
+
+    var c1 = cajones.create(490, 348, 'cajones3');
+    var c2 = cajones.create(454, 383, 'cajones2');
+    var c3 = cajones.create(423, 410, 'cajones1');
+
+    c1.body.immovable = true;
+    c2.body.immovable = true;
+    c3.body.immovable = true;
+
+    ventanas = game.add.group();
+
+    ventanas.enableBody = true;
+
+    var ventana1 = ventanas.create(7, 220, 'ventana1');
+    var ventana2 = ventanas.create(56, 370, 'ventana2');
+    var ventana3 = ventanas.create(98, 105, 'ventana3');
+    var ventana4 = ventanas.create(195, 232, 'ventana4');
+    var ventana5 = ventanas.create(340, 172, 'ventana5');
+    var ventana6 = ventanas.create(493, 149, 'ventana6');
+    var ventana7 = ventanas.create(605, 300, 'ventana7');
+    var ventana8 = ventanas.create(597, 102, 'ventana8');
+    var ventana9 = ventanas.create(697, 217, 'ventana9');
+    var ventana11 = ventanas.create(849, 308, 'ventana11');
+    var ventana12 = ventanas.create(310, 275, 'ventana12');
+    
+
+    ventana1.body.immovable = true;
+    ventana2.body.immovable = true;
+    ventana3.body.immovable = true;
+    ventana4.body.immovable = true;
+    ventana5.body.immovable = true;
+    ventana6.body.immovable = true;
+    ventana7.body.immovable = true;
+    ventana8.body.immovable = true;
+    ventana9.body.immovable = true;
+    ventana11.body.immovable = true;
+    ventana12.body.immovable = true;  
+
+    faroles = game.add.group();
+
+    faroles.enableBody = true; 
+
+    var farol = faroles.create(240, 100, 'farol');
+
+    farol.body.immovable = true;
+
+
+    // Música
+    music = game.add.audio('musica');
+    music.play();
+    boton = game.add.button(6, 6, 'boton', click, this);
+    boton.frame = 0;
+    
+    
+    // Escalones y chica, se ven recien cuando terminan de recolectar las notas
+    escalera = game.add.group();
+    escalera.enableBody = true;
+    
+    chicaG = game.add.group();
+    chicaG.enableBody = true;
+    beso = game.add.sprite(0,0, 'beso');
+    beso.visible = false;
 }
 
 
@@ -213,6 +253,8 @@ function update() {
     game.physics.arcade.collide(player, ventanas);
     game.physics.arcade.collide(stars, ventanas);
     game.physics.arcade.collide(player, faroles);
+    game.physics.arcade.collide(player, escalera);
+    game.physics.arcade.overlap(player, chicaG, ganar, null, this);
     
     //  Reset the players velocity (movement)
     player.body.velocity.x = 0;
@@ -267,23 +309,87 @@ function update() {
 	
 }
 
+var cantNotas=0;
+
 function collectStar (player, star) {
 
-    // Removes the star from the screen
     star.kill();
-	
-	//  Add and update the score
+    cantNotas ++;
     score += 10;
     puntosText.text = 'Puntos: ' + score;
+    
+    if(cantNotas === 15){
+        
+        apareceChica();
+        
+    }
 
 }
 
 function actualizaContador() {
-    contador++;
-    texto.setText('Tiempo: ' + contador);
+    
+    if(contador > 1){
+        contador--;
+        texto.setText('Tiempo: ' + contador);
+    }
+    else{
+        texto.setText('Tiempo: ' + contador);
+        perdiste();
+    }
+    
+}
+
+var chicaG;
+
+function apareceChica(){
+
+    // Aparece ventana  
+    ventAbierta.visible = true;
+    
+    // Aparece baranda
+    var ventana10 = ventanas.create(835, 99, 'ventana10');
+    ventana10.body.immovable = true;
+
+    // Aparece chica
+    var chica = chicaG.create(857, 27, 'chica');
+    chica.body.immovable = true;
+    
+    // Aparece "escalera"   
+    var escalon1 = escalera.create(775, 165, 'escalon');
+    escalon1.body.immovable = true;
+    var escalon2 = escalera.create(810, 115, 'escalon');
+    escalon2.body.immovable = true;
+    
+}
+
+function ganar(){
+    
+    beso.visible = true;
+    
+}
+
+function perdiste(){
+    
+}
+
+var estadoMusica = 'on';
+function click() {
+
+    if(estadoMusica === 'on'){
+        music.pause();
+        boton.frame = 1;
+        estadoMusica = 'off'
+    }
+    else{
+        music.resume();
+        boton.frame = 0;
+        estadoMusica = 'on'
+    }
+        
+        
 }
 
 </script>
-<div id="juego" style="width: 1100px;margin: auto;margin-top: 2%;"></div>
+    <div id="juego" style="width: 1100px;margin: auto;margin-top: 2%;"></div>
 </body>
 </html>
