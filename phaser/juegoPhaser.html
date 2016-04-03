@@ -60,7 +60,7 @@ function preload() {
     //game.load.audio('musica', 'assets/audio/jazz.mp3');
     game.load.audio('musica', 'assets/audio/blues-rapido2.mp3');
     game.load.spritesheet('boton', 'assets/audio/boton-musica.png', 36, 34);
-    
+    game.load.audio('guitarra', 'assets/audio/guitarra.mp3');
     
 }
 
@@ -81,6 +81,7 @@ var boton;
 var escalera;
 var beso;
 var chica;
+var guitarra;
 
 
 function create() {
@@ -247,6 +248,9 @@ function create() {
     boton = game.add.button(6, 6, 'boton', click, this);
     boton.frame = 0;
     
+    // Efecto al agarrar nota
+    guitarra = game.add.audio('guitarra');
+    
 
 }
 
@@ -323,7 +327,7 @@ function update() {
 var cantNotas=0;
 
 function tomaNota (player, nota) {
-
+    guitarra.play();
     nota.kill();
     cantNotas ++;
     score += 10;
