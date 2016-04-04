@@ -3,31 +3,53 @@
 <head>
 	<title>Nombre Juego</title>
 	<link rel="stylesheet" type="text/css" href="estilos/estilo.css">
+	<link href='https://fonts.googleapis.com/css?family=Fontdiner+Swanky' rel='stylesheet' type='text/css'>
+	<script type="text/javascript">
+  		function activarPrimerControl()
+  		{
+			//alert("LLEGO HASTA ACA");
+			var datos = window.location.search;
+			datos = datos.substr(1,datos.length);
+			//hemos conseguido que datos = "id=1&nom=nombre1" 
+			var arrVariables = datos.split ("&"); 
+			// arrVariables = ["id=1", "nom=nombre1"] 
+			var arrVar0 = arrVariables[0].split ("="); 
+			var arrVar1 = arrVariables[1].split ("="); 
+			// arrVar0 = ["id","1"] 
+			// arrVar1 = ["nom","nombre1"] 
+			var valor1a = arrVar0[1]; 
+			var valor1b = arrVar1[1]; 
+			//alert(valor);
+                        valor1a = 150 + (1000 * valor1b);
+    		document.getElementById('puntos').innerText = valor1a;
+    		document.getElementById('tiempo').innerText = valor1b;
+                console.log(valor1a+" "+valor1b);
+  		}
+	</script>
 </head>
-<body>
+<body onLoad="activarPrimerControl()">
 	<header id="menu">
-		<div>
-			<img class="divImagen" src="assets/gano.jpg" >
+		<div class="divImagen">
+			<img src="assets/gano.jpg" width="200px" height="160px">
 		</div>
 		<div class="gano">
 			<h1 class="mensajeGano">Ganaste!!!</h1>
 		</div>
 		<div class="musica">
-                        <audio src="assets/audio/gano.wav" autoplay></audio>
-			<!--<audio src="assets/audio/fantasmas.mp3" preload="auto" controls loop autoplay></audio>-->
+			<audio src="assets/audio/gano.wav" preload="auto" controls loop autoplay></audio>
 		</div>
 	</header>
 	<br>
 	<div id="cuerpo">
-		<div style="width: 870px; height: 250px; margin: 10px; position: absolute;border:5px solid #000">
+		<div style="width: 97%; height: 250px; margin: 10px; position: absolute;border:5px solid #000">
 			<table cellspacing="3" width="100%" style="border: 2px solid #FFF;">
 				<tr>
-					<td class="etiquetaTitulo" width="50%"><label class="etiqueta">Puntaje por nota:</label></td>
-					<td class="etiquetaResultado" width="50%"><label class="etiqueta">50 ptos</label></td>
+					<td class="etiquetaTitulo" width="50%"><label class="etiqueta">Puntaje Total por notas:</label></td>
+					<td class="etiquetaResultado" width="50%"><label class="etiqueta">150 ptos</label></td>
 				</tr>
 				<tr>
 					<td class="etiquetaTitulo" width="50%"><label class="etiqueta">Tiempo:</label></td>
-					<td class="etiquetaResultado" width="50%"><label class="etiqueta">5"</label></td>
+					<td class="etiquetaResultado" width="50%"><label class="etiqueta" id="tiempo"></label></td>
 				</tr> 
 				<tr>
 					<td class="etiquetaTitulo" width="50%"><label class="etiqueta">Bonus por tiempo:</label></td>
@@ -35,10 +57,11 @@
 				</tr>
 				<tr>
 					<td class="etiquetaTitulo" width="50%"><label class="etiqueta">Puntaje total:</label></td>
-					<td class="etiquetaResultado" width="50%"><label class="etiqueta">1500 ptos</label></td>
-				</tr>				
+					<td class="etiquetaResultado" width="50%"><label class="etiqueta" id="puntos"></label></td>
+				</tr>
 			</table>
 		</div>
 	</div>
+	
 </body>
 </html>
