@@ -25,8 +25,18 @@ Parámetros:
 		El último parámetro es un objeto que contiene cuatro referencias de funciones esenciales de Phaser.
 */			   
 var game = new Phaser.Game(1100, 600, Phaser.AUTO, 'juego', { preload: preload, create: create, update: update });
-                         //800x600 original - 1366x643 mi máquina
+                         
 function preload() {
+    
+    game.load.audio('musica', 'assets/audio/blues-rapido2.mp3');
+    game.load.spritesheet('boton', 'assets/audio/boton-musica.png', 36, 34);
+    //game.load.audio('guitarra', 'assets/audio/guitarra.mp3');
+    game.load.audio('salta', 'assets/audio/salta.wav');
+    game.load.audio('guitarra', 'assets/audio/guitar3.wav');
+    game.load.audio('aparece', 'assets/audio/aparece.wav');
+    
+    game.load.spritesheet('start', 'assets/start.png', 346,341);
+    
     game.load.image('sky', 'assets/pared2.png');
     game.load.image('ground', 'assets/calle.png');
     game.load.image('star', 'assets/nota2.png');
@@ -56,11 +66,7 @@ function preload() {
     game.load.image('chica', 'assets/chica.png');
     game.load.image('escalon', 'assets/notaVerde.png');
     game.load.image('beso', 'assets/gano.jpg');
-        
-    //game.load.audio('musica', 'assets/audio/jazz.mp3');
-    game.load.audio('musica', 'assets/audio/blues-rapido2.mp3');
-    game.load.spritesheet('boton', 'assets/audio/boton-musica.png', 36, 34);
-    game.load.audio('guitarra', 'assets/audio/guitarra.mp3');
+    
     
 }
 
@@ -71,7 +77,7 @@ var cursors;
 var score = 0;
 var puntosText;
 var ultimo = 'right';
-var contador = 0;
+var contador = 10;
 var texto=0;
 var ventanas;
 var faroles;
@@ -82,25 +88,34 @@ var escalera;
 var beso;
 var chica;
 var guitarra;
+var perdio=false;
+var tiempo = 0;
+var start;
+var aparece;
+var estadoMusica = 'on';
+var cantNotas=0;
 
 
 function create() {
+    
+    // Efecto sonido
+    music = game.add.audio('musica');
+    music.play();
+    music.volume = 10;
+    guitarra = game.add.audio('guitarra');
+    salta = game.add.audio('salta');
+    aparece = game.add.audio('aparece');
 
-    //  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
-
+   
     //  Agrega el fondo el cielo como fondo
     game.add.sprite(0, 0, 'sky');
 
-    //  Crea un grupo donde se van a agregar el suelo y dos plataformas.
+    
     platforms = game.add.group();
-
-    //  We will enable physics for any object that is created in this group
     platforms.enableBody = true;
-
     // Crea el suelo
     var ground = platforms.create(0, game.world.height - 133, 'ground');
-
     //  Indica que el suelo es inamovible.
     ground.body.immovable = true;
 
@@ -112,88 +127,74 @@ function create() {
     
     // Crea el jugador
     player = game.add.sprite(32, game.world.height - 200, 'dude');
-    
-    //  We need to enable physics on the player
     game.physics.arcade.enable(player);
-
-    //  Player physics properties. Give the little guy a slight bounce.
     // Revote al caer
     player.body.bounce.y = 0;
     // Fuerza de gravedad, influye en salto
     player.body.gravity.y = 600; //300
-	// Para que se vaya o no de cuadro 
+    // Para que se vaya o no de cuadro 
     player.body.collideWorldBounds = true;
+
 
     //  Animaciones para cuando camina
     player.animations.add('left', [0, 1, 2, 3,4], 10, true);
     player.animations.add('right', [5, 6, 7, 8, 9], 10, true);
 	
+        
     //  Los controles.
     cursors = game.input.keyboard.createCursorKeys();
 	
-    // Estrellas	
-    stars = game.add.group();
-
-    stars.enableBody = true;
-
-    //  Notas aleatorias
+        
+    // Notas	
+    notas = game.add.group();
+    notas.enableBody = true;
+    //  Notas desde el cielo
     for (var i = 0; i < 12; i++)
     {
-        var star = stars.create(i * 65, 0, 'star');
-
-        //  Let gravity do its thing
-        star.body.gravity.y = 30;
-
-        //  This just gives each star a slightly random bounce value
-        star.body.bounce.y = 0.2 + Math.random() * 0.2;
-        
-    }
+        var note = notas.create(i * 65, 0, 'star');
+        note.body.gravity.y = 30;
+        note.body.bounce.y = 0.2 + Math.random() * 0.2;       
+    }    
+    // Otras notas acomodadas
+    var nota1 = notas.create(12 * 65, 0, 'star');
+    var nota2 = notas.create(13 * 65, 0, 'star');
+    var nota3 = notas.create(110, 120, 'star');
+    nota1.body.gravity.y = 30;
+    nota1.body.bounce.y = 0.2 + Math.random() * 0.2;
+    nota2.body.gravity.y = 30;
+    nota2.body.bounce.y = 0.2 + Math.random() * 0.2;
+    nota3.body.gravity.y = 30;
+    nota3.body.bounce.y = 0.2 + Math.random() * 0.2;
     
-    // Otras notas
-    var star1 = stars.create(12 * 65, 0, 'star');
-    var star2 = stars.create(13 * 65, 0, 'star');
-    var star3 = stars.create(110, 120, 'star');
-
-    star1.body.gravity.y = 30;
-    star1.body.bounce.y = 0.2 + Math.random() * 0.2;
-    star2.body.gravity.y = 30;
-    star2.body.bounce.y = 0.2 + Math.random() * 0.2;
-    star3.body.gravity.y = 30;
-    star3.body.bounce.y = 0.2 + Math.random() * 0.2;
 	
     // Detalle donde se encuentra el progreso del juego
     var detalle = platforms.create(game.world.width - 135, 1, 'detalle');
     detalle.body.immovable = true;
-
     // Puntos y Tiempo
     texto = game.add.text(game.world.width - 128, 3, 'Tiempo: 0', { fill: '#FCF1D9'});
     texto.fontSize = '20px';
     texto.font = 'Arial';
     texto.fontWeight = 'bold';
-
     game.time.events.loop(Phaser.Timer.SECOND, actualizaContador, this);
-    puntosText = game.add.text(game.world.width - 127, 31, 'Puntos: 0', { fill: '#FCF1D9' });
+    puntosText = game.add.text(game.world.width - 127, 31, 'Puntos: '+contador , { fill: '#FCF1D9' });
     puntosText.fontSize = '20px';
     puntosText.font = 'Arial';
     puntosText.fontWeight = 'bold';
 
+
     // Cajones... Mejorar los bordes!!!
     cajones = game.add.group();
-
     cajones.enableBody = true;
-
     var c1 = cajones.create(490, 348, 'cajones3');
     var c2 = cajones.create(454, 383, 'cajones2');
     var c3 = cajones.create(423, 410, 'cajones1');
-
     c1.body.immovable = true;
     c2.body.immovable = true;
     c3.body.immovable = true;
 
+    // Plataformas de ventanas
     ventanas = game.add.group();
-
     ventanas.enableBody = true;
-
     var ventana1 = ventanas.create(7, 220, 'ventana1');
     var ventana2 = ventanas.create(56, 370, 'ventana2');
     var ventana3 = ventanas.create(98, 105, 'ventana3');
@@ -205,8 +206,6 @@ function create() {
     var ventana9 = ventanas.create(697, 217, 'ventana9');
     var ventana11 = ventanas.create(849, 308, 'ventana11');
     var ventana12 = ventanas.create(310, 275, 'ventana12');
-    
-
     ventana1.body.immovable = true;
     ventana2.body.immovable = true;
     ventana3.body.immovable = true;
@@ -217,63 +216,64 @@ function create() {
     ventana8.body.immovable = true;
     ventana9.body.immovable = true;
     ventana11.body.immovable = true;
-    ventana12.body.immovable = true;  
+    ventana12.body.immovable = true;  // foco
 
+    // Farol, donde se para el jugador
     faroles = game.add.group();
-
     faroles.enableBody = true; 
-
     var farol = faroles.create(240, 100, 'farol');
-
     farol.body.immovable = true;
 
 
     // Escalones y chica, se ven recien cuando terminan de recolectar las notas
     escalera = game.add.group();
-    escalera.enableBody = true;
-    
+    escalera.enableBody = true;    
     chicaG = game.add.group();
     chicaG.enableBody = true;
     beso = game.add.sprite(0,0, 'beso');
     beso.visible = false;
-
-
-    chica = game.add.sprite(857, 27, 'chica');
+    chica = game.add.sprite(859, 32, 'chica');
     chica.visible = false;
     game.physics.enable( [ player, chica ], Phaser.Physics.ARCADE);
 
-     // Música
-    music = game.add.audio('musica');
-    music.play();
+
+     // Boton Música
     boton = game.add.button(6, 6, 'boton', click, this);
     boton.frame = 0;
     
-    // Efecto al agarrar nota
-    guitarra = game.add.audio('guitarra');
+    start = game.add.sprite(320, 130, 'start');
+    start.frame = 0;
     
-
+    
 }
 
-
 function update() {
-
-    // Collide the player and the stars with the platforms. Para que al colisionar con el suelo o las plataformas no las "traspase" y quede en la superficie.
+    
     game.physics.arcade.collide(player, platforms);
     game.physics.arcade.collide(player, cajones);
-    game.physics.arcade.collide(stars, cajones);
+    game.physics.arcade.collide(notas, cajones);
     game.physics.arcade.collide(player, ventanas);
-    game.physics.arcade.collide(stars, ventanas);
+    game.physics.arcade.collide(notas, ventanas);
     game.physics.arcade.collide(player, faroles);
     game.physics.arcade.collide(player, escalera);
-    //game.physics.arcade.overlap(player, chicaG, ganar, null, this);
-    
-    // chica chico
+    game.physics.arcade.collide(notas, platforms);
+    game.physics.arcade.overlap(player, notas, tomaNota, null, this);
     game.physics.arcade.collide(player, chica, ganar, null, this);
     
-    
-    //  Reset the players velocity (movement)
     player.body.velocity.x = 0;
      
+    if(tiempo)
+        
+    // Si no perdió se puede seguir moviendo. 
+    if(!perdio && tiempo >= 4)
+        movimientos(); 
+    else
+        frenar();
+	
+}
+
+function movimientos(){
+    
     // MOVIMIENTOS
     if (cursors.left.isDown)
     {
@@ -314,17 +314,25 @@ function update() {
     //  Allow the player to jump if they are touching the ground.
     if (cursors.up.isDown && player.body.touching.down)
     {
+        salta.play();
 		//velocidad de salto
         player.body.velocity.y = -300;
     }
-
-	game.physics.arcade.collide(stars, platforms);
-	
-	game.physics.arcade.overlap(player, stars, tomaNota, null, this);
-	
+    
 }
 
-var cantNotas=0;
+function frenar(){
+    
+    player.animations.stop();
+			
+                        if(ultimo === 'right'){
+                            // Cuando para "mira" .
+                            player.frame = 5;
+                        }
+                        else{
+                             player.frame = 4;
+                        }
+}
 
 function tomaNota (player, nota) {
     guitarra.play();
@@ -332,6 +340,7 @@ function tomaNota (player, nota) {
     cantNotas ++;
     score += 10;
     puntosText.text = 'Puntos: ' + score;
+    contador = contador + 2;
     
     var note = game.add.sprite(1025,579 - 31*cantNotas,'star'); // 1011x580
     if(cantNotas%2 == 0)
@@ -344,24 +353,41 @@ function tomaNota (player, nota) {
         apareceChica();
         
     }
-
 }
 
 function actualizaContador() {
     
-    if(contador > 1){
-        contador--;
-        texto.setText('Tiempo: ' + contador);
+    if(tiempo >= 4){
+        start.visible = false;
+        if(contador > 1){
+            contador--;
+                texto.setText('Tiempo: ' + contador);
+            if(contador > 5){
+                texto.fill = '#FFFFFF';
+            }
+            else{
+                texto.fill = '#FF0000';
+                texto.fontWeight = 'bold';
+            }
+        }
+        else{
+            contador = 0;
+            texto.setText('Tiempo: ' + contador);
+            perdiste();
+        }
     }
     else{
-        texto.setText('Tiempo: ' + contador);
-        perdiste();
+        tiempo++;
+        start.frame = tiempo;
+        
     }
     
 }
 
 function apareceChica(){
 
+    aparece.play();
+    console.log('aparecio');
     // Aparece ventana  
     ventAbierta.visible = true;
     
@@ -385,31 +411,35 @@ function apareceChica(){
 function ganar(){
     
     //beso.visible = true;  
-    window.location="pablo/juegoPhaserGano.html";
+    window.location="juegoPhaserGano.html";
 
     
 }
 
 function perdiste(){
     
+    perdio=true;
+    
 }
 
-var estadoMusica = 'on';
 function click() {
 
     if(estadoMusica === 'on'){
         music.pause();
         boton.frame = 1;
-        estadoMusica = 'off'
+        estadoMusica = 'off';
     }
     else{
         music.resume();
         boton.frame = 0;
-        estadoMusica = 'on'
+        estadoMusica = 'on';
+        
     }
         
         
 }
+
+
 
 </script>
     <div id="juego" style="width: 1100px;margin: auto;margin-top: 2%;"></div>
