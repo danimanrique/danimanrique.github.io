@@ -33,6 +33,7 @@ function preload() {
     game.load.audio('salta', 'assets/audio/salta.wav');
     game.load.audio('guitarra', 'assets/audio/guitar3.wav');
     game.load.audio('aparece', 'assets/audio/aparece.wav');
+    game.load.audio('perdioM', 'assets/audio/perdio.wav');
     
     game.load.spritesheet('start', 'assets/start.png', 346,341);
     
@@ -91,6 +92,7 @@ var perdio=false;
 var tiempo = 0;
 var start;
 var aparece;
+var perdioM;
 var estadoMusica = 'on';
 var cantNotas=0;
 
@@ -104,6 +106,7 @@ function create() {
     guitarra = game.add.audio('guitarra');
     salta = game.add.audio('salta');
     aparece = game.add.audio('aparece');
+    perdioM = game.add.audio('perdioM');
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
    
@@ -170,12 +173,12 @@ function create() {
     var detalle = platforms.create(game.world.width - 135, 1, 'detalle');
     detalle.body.immovable = true;
     // Puntos y Tiempo
-    texto = game.add.text(game.world.width - 128, 3, 'Tiempo: 0', { fill: '#FCF1D9'});
+    texto = game.add.text(game.world.width - 128, 3, 'Tiempo: 10', { fill: '#FCF1D9'});
     texto.fontSize = '20px';
     texto.font = 'Arial';
     texto.fontWeight = 'bold';
     game.time.events.loop(Phaser.Timer.SECOND, actualizaContador, this);
-    puntosText = game.add.text(game.world.width - 127, 31, 'Puntos: '+contador , { fill: '#FCF1D9' });
+    puntosText = game.add.text(game.world.width - 127, 31, 'Puntos: '+score , { fill: '#FCF1D9' });
     puntosText.fontSize = '20px';
     puntosText.font = 'Arial';
     puntosText.fontWeight = 'bold';
@@ -415,9 +418,38 @@ function ganar(){
     
 }
 
+var vuelta = 0;
+
 function perdiste(){
     
-    perdio=true;
+    if(vuelta === 0){
+        perdio=true;
+        music.stop();
+
+        perdioM.play();
+        vuelta ++;
+        
+        var text = game.add.text(game.world.centerX, game.world.centerY, 'GAME OVER \n Click para reiniciar');
+        text.anchor.set(0.5);
+        text.align = 'center';
+
+        //  Font style
+        text.font = 'Arial Black';
+        text.fontSize = 50;
+        text.fontWeight = 'bold';
+        text.fill = '#ff0000';
+        
+        text.stroke = "#ffffff";
+        text.strokeThickness = 12;
+        
+        text.inputEnabled = true;
+        text.events.onInputDown.add(reinicio,this);
+    }
+}
+
+function reinicio(){
+    
+    location.reload();
     
 }
 
