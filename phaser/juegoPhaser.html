@@ -95,7 +95,7 @@ var aparece;
 var perdioM;
 var estadoMusica = 'on';
 var cantNotas=0;
-
+var gano=false;
 
 function create() {
     
@@ -264,9 +264,7 @@ function update() {
     game.physics.arcade.collide(player, chica, ganar, null, this);
     
     player.body.velocity.x = 0;
-     
-    if(tiempo)
-        
+             
     // Si no perdió se puede seguir moviendo. 
     if(!perdio && tiempo >= 4)
         movimientos(); 
@@ -360,31 +358,32 @@ function tomaNota (player, nota) {
 
 function actualizaContador() {
     
-    if(tiempo >= 4){
-        start.visible = false;
-        if(contador > 1){
-            contador--;
-                texto.setText('Tiempo: ' + contador);
-            if(contador > 5){
-                texto.fill = '#FFFFFF';
+    if(!gano){
+        if(tiempo >= 4){
+            start.visible = false;
+            if(contador > 1){
+                contador--;
+                    texto.setText('Tiempo: ' + contador);
+                if(contador > 5){
+                    texto.fill = '#FFFFFF';
+                }
+                else{
+                    texto.fill = '#FF0000';
+                    texto.fontWeight = 'bold';
+                }
             }
             else{
-                texto.fill = '#FF0000';
-                texto.fontWeight = 'bold';
+                contador = 0;
+                texto.setText('Tiempo: ' + contador);
+                perdiste();
             }
         }
         else{
-            contador = 0;
-            texto.setText('Tiempo: ' + contador);
-            perdiste();
+            tiempo++;
+            start.frame = tiempo;
+
         }
-    }
-    else{
-        tiempo++;
-        start.frame = tiempo;
-        
-    }
-    
+    }   
 }
 
 function apareceChica(){
@@ -413,7 +412,7 @@ function apareceChica(){
 
 function ganar(){
     
-    //beso.visible = true;  
+    gano=true;
     window.location="juegoPhaserGano.html?ptos="+score+"&tiem="+contador;
 
     
