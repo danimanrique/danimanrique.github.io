@@ -1,46 +1,45 @@
-# Astro Starter Kit: Basics
+# Portfolio de Daniela Manrique
 
-```sh
-npm create astro@latest -- --template basics
-```
+Sitio personal desarrollado con Astro 5 y Tailwind CSS 4 para presentar el perfil profesional de Daniela Manrique como Full Stack Developer. La interfaz está inspirada en dashboards modernos, con foco en la conversación visual y la presentación clara de habilidades, experiencia y formas de contacto.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Contenido destacado
+- Navegación fija y secciones ancladas para un recorrido fluido.
+- Hero con tarjeta interactiva de perfil que resalta datos clave y enlaces a redes.
+- Estadísticas, servicios, habilidades y stack tecnológico organizados en bloques temáticos.
+- Galería de proyectos con tarjetas estilizadas y CTA para ver el trabajo completo.
+- Formulario de contacto con campos validados y datos directos.
 
-## 🚀 Project Structure
+## Tecnologías
+- Astro 5.
+- Tailwind CSS 4 mediante `@tailwindcss/vite` para utilidades modernas.
+- CSS modular dedicado para los componentes principales.
+- Recursos estáticos servidos desde `public/` y `src/assets/`.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Requisitos previos
+- Node.js 18.17+ o 20.x
+- npm 9+
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+## Puesta en marcha local
+1. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+2. Levantar el entorno de desarrollo:
+   ```bash
+   npm run dev
+   ```
+   Por defecto, el sitio queda disponible en `http://localhost:4321`.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Scripts disponibles
+- `npm run dev`: inicia el servidor de desarrollo con recarga en caliente.
+- `npm run build`: genera los archivos listos para producción en `dist/`.
+- `npm run preview`: sirve el build final para validarlo antes de desplegar.
+- `npm run astro <comando>`: acceso directo a utilidades de la CLI de Astro.
 
-## 🧞 Commands
+## Despliegue
+1. Ejecutar `npm run build`.
+2. Subir el contenido de `dist/` a tu proveedor (Netlify, Vercel, GitHub Pages, etc.).
+3. Configurar el servidor para servir archivos estáticos y habilitar HTTPS.
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Créditos
+Diseño y desarrollo: Daniela Manrique. Construido con ♥ aprovechando el ecosistema de Astro.

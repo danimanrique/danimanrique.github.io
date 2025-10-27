@@ -1,41 +1,9 @@
 ---
 import profileImg from "../assets/profile.png";
-import linkedinIcon from "../assets/linkedin.svg";
 import Badge from "../components/Badge.astro";
 ---
 
 <div class="page">
-  <header class="navbar">
-    <div class="container">
-      <a class="brand" href="#home">
-        <span class="brand-icon">&lt;/&gt;</span>
-        <span class="brand-name">Daniela Manrique</span>
-      </a>
-      <nav class="nav-links">
-        <a href="#home" class="active">Inicio</a>
-        <a href="#about">Sobre mí</a>
-        <a href="#skills">Skills</a>
-        <a href="#works">Proyectos</a>
-        <a href="#blog">Blog</a>
-        <a href="#contact">Contacto</a>
-      </nav>
-      <div class="nav-actions">
-        <button class="icon-button" aria-label="Toggle theme">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
-          </svg>
-        </button>
-        <button class="icon-button" aria-label="Open menu">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="4" x2="20" y1="6" y2="6"></line>
-            <line x1="4" x2="20" y1="12" y2="12"></line>
-            <line x1="4" x2="20" y1="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </header>
-
   <main>
     <section id="home" class="hero section">
       <div class="container hero-grid">
@@ -88,34 +56,19 @@ import Badge from "../components/Badge.astro";
               href="https://www.linkedin.com/in/daniela-andrea-manrique-282269138/"
               target="_blank"
             >
-              <svg height="13px" width="13px" viewBox="0 0 260.366 260.366" xml:space="preserve">
-                <g stroke-width="0"></g><g stroke-linecap="round" stroke-linejoin="round"></g><g
-                  id="SVGRepo_iconCarrier"
-                >
-                  <g>
-                    <path
-                      d="M34.703,0.183C15.582,0.183,0.014,15.748,0,34.884C0,54.02,15.568,69.588,34.703,69.588 c19.128,0,34.688-15.568,34.688-34.704C69.391,15.75,53.83,0.183,34.703,0.183z"
-                    ></path>
-                    <path
-                      d="M60.748,83.531H8.654c-2.478,0-4.488,2.009-4.488,4.489v167.675c0,2.479,2.01,4.488,4.488,4.488h52.093 c2.479,0,4.489-2.01,4.489-4.488V88.02C65.237,85.539,63.227,83.531,60.748,83.531z"
-                    ></path>
-                    <path
-                      d="M193.924,81.557c-19.064,0-35.817,5.805-46.04,15.271V88.02c0-2.48-2.01-4.489-4.489-4.489H93.424 c-2.479,0-4.489,2.009-4.489,4.489v167.675c0,2.479,2.01,4.488,4.489,4.488h52.044c2.479,0,4.489-2.01,4.489-4.488v-82.957 c0-23.802,4.378-38.555,26.227-38.555c21.526,0.026,23.137,15.846,23.137,39.977v81.535c0,2.479,2.01,4.488,4.49,4.488h52.068 c2.478,0,4.488-2.01,4.488-4.488v-91.977C260.366,125.465,252.814,81.557,193.924,81.557z"
-                    ></path>
-                  </g>
-                </g></svg
-              >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M20.45 20.45h-3.56v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.41-2.07 2.86v5.49H9.46V9.75h3.42v1.46h.05c.48-.9 1.65-1.85 3.4-1.85 3.63 0 4.3 2.39 4.3 5.5v5.59ZM5.34 8.29a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.55V9.75h3.57v10.7ZM22.23 0H1.77A1.77 1.77 0 0 0 0 1.77v20.46C0 23.4.6 24 1.77 24h20.46c1.17 0 1.77-.6 1.77-1.77V1.77C24 .6 23.4 0 22.23 0Z"
+                ></path>
+              </svg>
             </a>
             <a class="button ghost" href="https://github.com/danimanrique" target="_blank">
-              <svg width="13px" height="13px" viewBox="0 -0.5 25 25"
-                ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g stroke-linecap="round" stroke-linejoin="round"></g><g
-                  id="SVGRepo_iconCarrier"
-                  ><path
-                    d="m12.301 0h.093c2.242 0 4.34.613 6.137 1.68l-.055-.031c1.871 1.094 3.386 2.609 4.449 4.422l.031.058c1.04 1.769 1.654 3.896 1.654 6.166 0 5.406-3.483 10-8.327 11.658l-.087.026c-.063.02-.135.031-.209.031-.162 0-.312-.054-.433-.144l.002.001c-.128-.115-.208-.281-.208-.466 0-.005 0-.01 0-.014v.001q0-.048.008-1.226t.008-2.154c.007-.075.011-.161.011-.249 0-.792-.323-1.508-.844-2.025.618-.061 1.176-.163 1.718-.305l-.076.017c.573-.16 1.073-.373 1.537-.642l-.031.017c.508-.28.938-.636 1.292-1.058l.006-.007c.372-.476.663-1.036.84-1.645l.009-.035c.209-.683.329-1.468.329-2.281 0-.045 0-.091-.001-.136v.007c0-.022.001-.047.001-.072 0-1.248-.482-2.383-1.269-3.23l.003.003c.168-.44.265-.948.265-1.479 0-.649-.145-1.263-.404-1.814l.011.026c-.115-.022-.246-.035-.381-.035-.334 0-.649.078-.929.216l.012-.005c-.568.21-1.054.448-1.512.726l.038-.022-.609.384c-.922-.264-1.981-.416-3.075-.416s-2.153.152-3.157.436l.081-.02q-.256-.176-.681-.433c-.373-.214-.814-.421-1.272-.595l-.066-.022c-.293-.154-.64-.244-1.009-.244-.124 0-.246.01-.364.03l.013-.002c-.248.524-.393 1.139-.393 1.788 0 .531.097 1.04.275 1.509l-.01-.029c-.785.844-1.266 1.979-1.266 3.227 0 .025 0 .051.001.076v-.004c-.001.039-.001.084-.001.13 0 .809.12 1.591.344 2.327l-.015-.057c.189.643.476 1.202.85 1.693l-.009-.013c.354.435.782.793 1.267 1.062l.022.011c.432.252.933.465 1.46.614l.046.011c.466.125 1.024.227 1.595.284l.046.004c-.431.428-.718 1-.784 1.638l-.001.012c-.207.101-.448.183-.699.236l-.021.004c-.256.051-.549.08-.85.08-.022 0-.044 0-.066 0h.003c-.394-.008-.756-.136-1.055-.348l.006.004c-.371-.259-.671-.595-.881-.986l-.007-.015c-.198-.336-.459-.614-.768-.827l-.009-.006c-.225-.169-.49-.301-.776-.38l-.016-.004-.32-.048c-.023-.002-.05-.003-.077-.003-.14 0-.273.028-.394.077l.007-.003q-.128.072-.08.184c.039.086.087.16.145.225l-.001-.001c.061.072.13.135.205.19l.003.002.112.08c.283.148.516.354.693.603l.004.006c.191.237.359.505.494.792l.01.024.16.368c.135.402.38.738.7.981l.005.004c.3.234.662.402 1.057.478l.016.002c.33.064.714.104 1.106.112h.007c.045.002.097.002.15.002.261 0 .517-.021.767-.062l-.027.004.368-.064q0 .609.008 1.418t.008.873v.014c0 .185-.08.351-.208.466h-.001c-.119.089-.268.143-.431.143-.075 0-.147-.011-.214-.032l.005.001c-4.929-1.689-8.409-6.283-8.409-11.69 0-2.268.612-4.393 1.681-6.219l-.032.058c1.094-1.871 2.609-3.386 4.422-4.449l.058-.031c1.739-1.034 3.835-1.645 6.073-1.645h.098-.005zm-7.64 17.666q.048-.112-.112-.192-.16-.048-.208.032-.048.112.112.192.144.096.208-.032zm.497.545q.112-.08-.032-.256-.16-.144-.256-.048-.112.08.032.256.159.157.256.047zm.48.72q.144-.112 0-.304-.128-.208-.272-.096-.144.08 0 .288t.272.112zm.672.673q.128-.128-.064-.304-.192-.192-.32-.048-.144.128.064.304.192.192.32.044zm.913.4q.048-.176-.208-.256-.24-.064-.304.112t.208.24q.24.097.304-.096zm1.009.08q0-.208-.272-.176-.256 0-.256.176 0 .208.272.176.256.001.256-.175zm.929-.16q-.032-.176-.288-.144-.256.048-.224.24t.288.128.225-.224z"
-                  ></path></g
-                ></svg
-              ></a
-            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M12 .5C5.65.5.5 5.74.5 12.2a11.7 11.7 0 0 0 7.66 11.1c.56.1.77-.25.77-.55v-2c-3.12.7-3.78-1.56-3.78-1.56-.5-1.3-1.22-1.65-1.22-1.65-1-.7.08-.68.08-.68 1.1.08 1.68 1.15 1.68 1.15.98 1.71 2.58 1.22 3.22.93.1-.73.38-1.22.68-1.5-2.5-.29-5.12-1.3-5.12-5.8 0-1.28.44-2.31 1.16-3.12-.12-.3-.5-1.53.12-3.18 0 0 .94-.31 3.1 1.19a10.4 10.4 0 0 1 5.64 0c2.14-1.5 3.08-1.19 3.08-1.19.62 1.65.24 2.88.12 3.18.74.81 1.16 1.84 1.16 3.12 0 4.52-2.62 5.5-5.12 5.79.4.36.74 1.04.74 2.1v3.11c0 .3.2.66.78.55a11.7 11.7 0 0 0 7.66-11.1C23.5 5.74 18.35.5 12 .5Z"
+                ></path>
+              </svg>
+            </a>
             <a class="button ghost" href="/CV-Daniela-Manrique.pdf" download>Descargar CV</a>
           </div>
         </article>
@@ -135,8 +88,8 @@ import Badge from "../components/Badge.astro";
             trabajando junto a equipos multidisciplinarios.
           </p>
           <p>
-            Me especializo en construir aplicaciones web modernas con tecnologías como Angular, React, NestJS y Node. Me encanta
-            enfrentar retos complejos y transformarlos en soluciones que resuelvan necesidades reales.
+            Me especializo en construir aplicaciones web modernas con tecnologías como Angular, React, NestJS y Node. Me
+            encanta enfrentar retos complejos y transformarlos en soluciones que resuelvan necesidades reales.
           </p>
           <a class="text-link" href="#works">Ver proyectos</a>
         </article>
@@ -147,23 +100,31 @@ import Badge from "../components/Badge.astro";
       <div class="container">
         <div class="section-header">
           <h2>Skills</h2>
-          <p>Construyo experiencias completas desde el diseño hasta el código en producción.</p>
+          <p>Construyo experiencias completas desde el diseño hasta el deploy en producción.</p>
         </div>
         <div class="services">
           <article class="service">
-            <h3>Web Development</h3>
-            <p>HTML · CSS · React · Astro</p>
+            <h3>Front End Development</h3>
+            <p>HTML · CSS · Angular · React</p>
           </article>
           <article class="service">
-            <h3>App Development</h3>
-            <p>React Native · Expo</p>
+            <h3>Back End Development</h3>
+            <p>Node.js · Express · NestJS · MySQL</p>
           </article>
         </div>
-        <div class="skill-tags">
-          <div class="tag html">HTML</div>
-          <div class="tag css">CSS</div>
-          <div class="tag js">JavaScript</div>
-          <div class="tag react">React</div>
+        <div class="services">
+          <article class="service">
+            <h3>App Development</h3>
+            <p>Ionic · Capacitor · React Native · Expo</p>
+          </article>
+          <article class="service">
+            <h3>DevOps</h3>
+            <p>Docker · CI/CD</p>
+          </article>
+          <article class="service">
+            <h3>Automaticación</h3>
+            <p>N8N · Make</p>
+          </article>
         </div>
       </div>
     </section>
@@ -231,58 +192,8 @@ import Badge from "../components/Badge.astro";
       </div>
     </section>
   </main>
-
-  <footer class="footer">
-    <div class="container footer-content">
-      <p>© {new Date().getFullYear()} Daniela Manrique. Todos los derechos reservados.</p>
-      <div class="social">
-        <a href="https://github.com" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-            <path
-              d="M12 .5C5.65.5.5 5.74.5 12.2a11.7 11.7 0 0 0 7.66 11.1c.56.1.77-.25.77-.55v-2c-3.12.7-3.78-1.56-3.78-1.56-.5-1.3-1.22-1.65-1.22-1.65-1-.7.08-.68.08-.68 1.1.08 1.68 1.15 1.68 1.15.98 1.71 2.58 1.22 3.22.93.1-.73.38-1.22.68-1.5-2.5-.29-5.12-1.3-5.12-5.8 0-1.28.44-2.31 1.16-3.12-.12-.3-.5-1.53.12-3.18 0 0 .94-.31 3.1 1.19a10.4 10.4 0 0 1 5.64 0c2.14-1.5 3.08-1.19 3.08-1.19.62 1.65.24 2.88.12 3.18.74.81 1.16 1.84 1.16 3.12 0 4.52-2.62 5.5-5.12 5.79.4.36.74 1.04.74 2.1v3.11c0 .3.2.66.78.55a11.7 11.7 0 0 0 7.66-11.1C23.5 5.74 18.35.5 12 .5Z"
-            ></path>
-          </svg>
-        </a>
-        <a href="https://www.linkedin.com" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-            <path
-              d="M20.45 20.45h-3.56v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.41-2.07 2.86v5.49H9.46V9.75h3.42v1.46h.05c.48-.9 1.65-1.85 3.4-1.85 3.63 0 4.3 2.39 4.3 5.5v5.59ZM5.34 8.29a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.55V9.75h3.57v10.7ZM22.23 0H1.77A1.77 1.77 0 0 0 0 1.77v20.46C0 23.4.6 24 1.77 24h20.46c1.17 0 1.77-.6 1.77-1.77V1.77C24 .6 23.4 0 22.23 0Z"
-            ></path>
-          </svg>
-        </a>
-        <a href="mailto:daniela@example.com" aria-label="Email">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-            <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"
-            ></path>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </footer>
 </div>
-
 <style>
-  :global(body) {
-    font-family: "Poppins", "Inter", "Segoe UI", sans-serif;
-    background-color: #0d1520;
-    color: #f8fafc;
-  }
-
-  :global(*) {
-    box-sizing: border-box;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-  }
-
   .page {
     min-height: 100vh;
     background: radial-gradient(circle at 20% 20%, rgba(33, 211, 194, 0.08), transparent 55%),
@@ -306,110 +217,8 @@ import Badge from "../components/Badge.astro";
     z-index: 1;
   }
 
-  .container {
-    margin: 0 auto;
-    max-width: 1100px;
-    padding: 0 24px;
-  }
-
   .section {
     padding: 64px 0;
-  }
-
-  .navbar {
-    position: sticky;
-    top: 0;
-    backdrop-filter: blur(18px);
-    background: rgba(10, 17, 26, 0.92);
-    border-bottom: 1px solid rgba(77, 124, 149, 0.15);
-    z-index: 10;
-  }
-
-  .navbar .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 24px;
-  }
-
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 600;
-    font-size: 18px;
-    color: #f4d940;
-  }
-
-  .brand-icon {
-    display: grid;
-    place-items: center;
-    height: 32px;
-    width: 32px;
-    border-radius: 10px;
-    background: rgb(19, 45, 47, 0.12);
-    border: 1px solid rgb(244, 217, 64, 0.6);
-    font-size: 14px;
-    color: rgb(244, 217, 64);
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 24px;
-    font-size: 14px;
-    color: #94a3b8;
-  }
-
-  .nav-links a {
-    position: relative;
-    padding-bottom: 3px;
-    transition: color 0.2s ease;
-  }
-
-  .nav-links a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 100%;
-    height: 2px;
-    background: #f4d940;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.2s ease;
-  }
-
-  .nav-links a:hover,
-  .nav-links a.active {
-    color: #f4d940;
-  }
-
-  .nav-links a:hover::after,
-  .nav-links a.active::after {
-    transform: scaleX(1);
-  }
-
-  .nav-actions {
-    display: flex;
-    gap: 12px;
-  }
-
-  .icon-button {
-    height: 36px;
-    width: 36px;
-    border-radius: 12px;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    background: rgba(15, 23, 42, 0.6);
-    color: #94a3b8;
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .icon-button:hover {
-    color: #f4d940;
-    border-color: rgb(19, 45, 47, 0.4);
   }
 
   .hero {
@@ -510,7 +319,7 @@ import Badge from "../components/Badge.astro";
   }
 
   .button.primary {
-    background: linear-gradient(90deg, #f4d940, #1dd9cd);
+    background: #f4d940;
     color: #05292a;
   }
 
@@ -681,7 +490,6 @@ import Badge from "../components/Badge.astro";
   .section-header p {
     margin: 0;
     color: #94a3b8;
-    max-width: 520px;
   }
 
   .services {
@@ -920,43 +728,6 @@ import Badge from "../components/Badge.astro";
     font-size: 14px;
   }
 
-  .footer {
-    padding: 32px 0;
-    border-top: 1px solid rgba(148, 163, 184, 0.1);
-    background: rgba(9, 16, 26, 0.92);
-  }
-
-  .footer-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    font-size: 13px;
-    color: #94a3b8;
-  }
-
-  .social {
-    display: flex;
-    gap: 16px;
-    color: #94a3b8;
-  }
-
-  .social a {
-    height: 38px;
-    width: 38px;
-    border-radius: 12px;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    background: rgba(15, 24, 38, 0.6);
-    display: grid;
-    place-items: center;
-    transition: all 0.2s ease;
-  }
-
-  .social a:hover {
-    color: #f4d940;
-    border-color: rgb(19, 45, 47, 0.4);
-  }
-
   @media (max-width: 1024px) {
     .hero-grid {
       grid-template-columns: 1fr;
@@ -991,14 +762,6 @@ import Badge from "../components/Badge.astro";
   }
 
   @media (max-width: 768px) {
-    .nav-links {
-      display: none;
-    }
-
-    .nav-actions {
-      gap: 8px;
-    }
-
     .hero {
       padding-top: 80px;
     }
@@ -1019,18 +782,9 @@ import Badge from "../components/Badge.astro";
     .section {
       padding: 56px 0;
     }
-
-    .footer-content {
-      flex-direction: column;
-      text-align: center;
-    }
   }
 
   @media (max-width: 540px) {
-    .container {
-      padding: 0 18px;
-    }
-
     .section-title h2,
     .section-header h2 {
       font-size: 24px;
