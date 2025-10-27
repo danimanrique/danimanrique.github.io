@@ -1,6 +1,9 @@
 ---
 import profileImg from "../assets/profile.png";
 import Badge from "../components/Badge.astro";
+import p1Img from "../assets/proyectos/p1.png";
+import p2Img from "../assets/proyectos/p2.png";
+import p3Img from "../assets/proyectos/p3.png";
 ---
 
 <div class="page">
@@ -10,16 +13,16 @@ import Badge from "../components/Badge.astro";
         <div class="hero-content">
           <p class="eyebrow">Hola!</p>
           <h1>
-            Hey, soy <span>Daniela</span><br />
+            Soy <span>Daniela</span><br />
             Full Stack Developer
           </h1>
           <p class="lead">
-            Combino diseño y código para crear experiencias web memorables. Me apasiona construir productos escalables y
-            accesibles que generan impacto real.
+            Combino diseño y código para crear experiencias web claras y atractivas. Me apasiona construir productos que
+            generen impacto real.
           </p>
           <p class="lead">
-            Cada desafío representa una oportunidad de aprendizaje y una forma de aportar un enfoque creativo,
-            resolutivo y adaptable a los proyectos.
+            Cada desafío es una oportunidad para aprender y aportar una mirada creativa, resolutiva y adaptable a cada
+            proyecto.
           </p>
           <a class="text-link" href="#contact">Contame tu idea</a>
         </div>
@@ -83,13 +86,14 @@ import Badge from "../components/Badge.astro";
         </div>
         <article class="about-card">
           <p>
-            Soy una desarrolladora Full Stack apasionada por el código limpio, las interfaces intuitivas y las
-            experiencias memorables. Disfruto liderar proyectos end-to-end, desde la idea hasta el lanzamiento,
-            trabajando junto a equipos multidisciplinarios.
+            Soy desarrolladora Full Stack con foco en crear aplicaciones web modernas, escalables y fáciles de mantener.
+            Disfruto participar en todo el proceso de desarrollo, desde el diseño y la arquitectura hasta la
+            implementación y el despliegue.
           </p>
           <p>
-            Me especializo en construir aplicaciones web modernas con tecnologías como Angular, React, NestJS y Node. Me
-            encanta enfrentar retos complejos y transformarlos en soluciones que resuelvan necesidades reales.
+            Me interesa comprender a fondo las necesidades de cada proyecto para diseñar soluciones que aporten valor
+            real. Busco resolver problemas complejos con un enfoque práctico y de calidad, y valoro especialmente los
+            procesos colaborativos y las metodologías que impulsan la mejora continua.
           </p>
           <a class="text-link" href="#works">Ver proyectos</a>
         </article>
@@ -138,30 +142,36 @@ import Badge from "../components/Badge.astro";
         <div class="works-grid">
           <article class="work-card">
             <div class="work-image">
-              <img
-                src="https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=900&q=80"
-                alt="Project preview"
-                loading="lazy"
-              />
+              <img src={p1Img.src} alt="Project preview" loading="lazy" />
             </div>
             <div class="work-content">
-              <h3>Plataforma E-learning</h3>
-              <p>Aplicación SaaS para cursos interactivos con autenticación y dashboards personalizados.</p>
-              <a class="text-link" href="#">Ver sitio</a>
+              <h3>Sistema de Gestión Interno</h3>
+              <p>Aplicación web para la gestión de procesos de obras públicas.</p>
+              <p><i>Proyecto Privado</i></p>
             </div>
           </article>
           <article class="work-card">
             <div class="work-image">
-              <img
-                src="https://images.unsplash.com/photo-1504805572947-34fad45aed93?auto=format&fit=crop&w=900&q=80"
-                alt="Project preview"
-                loading="lazy"
-              />
+              <img src={p2Img.src} alt="Project preview" loading="lazy" />
             </div>
             <div class="work-content">
-              <h3>Dashboard Analytics</h3>
-              <p>Panel de visualización de datos en tiempo real con reportes y métricas de negocio.</p>
-              <a class="text-link" href="#">Ver sitio</a>
+              <h3>Landing Page</h3>
+              <p>Página web personal diseñada para Alicia Susana Arias, escritora de literatura contemporánea.</p>
+              <a class="text-link" href="https://alicia-arias.com/" target="_blank">Ver sitio</a>
+            </div>
+          </article>
+          <article class="work-card">
+            <div class="work-image">
+              <img src={p3Img.src} alt="Project preview" loading="lazy" />
+            </div>
+            <div class="work-content">
+              <h3>Pomodoro Timer</h3>
+              <p>
+                Temporizador construido con Angular, diseñado para ayudarte a mantener el enfoque y mejorar tu
+                productividad.
+              </p>
+              <a class="text-link" href="https://kaleidoscopic-youtiao-799be5.netlify.app/" target="_blank">Ver sitio</a
+              >
             </div>
           </article>
         </div>
@@ -172,7 +182,8 @@ import Badge from "../components/Badge.astro";
       <div class="container contact-grid">
         <div class="section-header">
           <h2>Contacto</h2>
-          <p>Estoy disponible para proyectos freelance y colaboraciones.</p>
+          <p>¿Tenés una idea para un sitio o una aplicación web?</p>
+          <p>Podemos desarrollarla juntos con un enfoque práctico y orientado a resultados.</p>
         </div>
         <form class="contact-form">
           <div class="field">
