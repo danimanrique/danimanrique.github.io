@@ -1,0 +1,66 @@
+---
+const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL;
+const mailtoLink = contactEmail ? `mailto:${contactEmail}` : "#";
+const isLinkDisabled = !contactEmail;
+---
+
+<section id="contact" class="section">
+  <div class="container">
+    <div class="contact-cta">
+      <div class="section-header">
+        <h2>Contacto</h2>
+        <p>¿Tenés una idea para un sitio o una aplicación web?</p>
+        <p>Podemos desarrollarla juntos con un enfoque práctico y orientado a resultados.</p>
+      </div>
+      <div class="cta-body">
+        <a class="button primary" href={mailtoLink} aria-disabled={isLinkDisabled} data-disabled={isLinkDisabled}>
+          Escribime
+        </a>
+        {isLinkDisabled && (
+          <p class="cta-warning">Configurá `PUBLIC_CONTACT_EMAIL` en tu archivo .env para habilitar el contacto.</p>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-cta {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 28px;
+    padding: 36px;
+    border-radius: 28px;
+    background: rgba(15, 24, 38, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+  }
+
+  .cta-body {
+    gap: 16px;
+  }
+
+  .button{
+    margin: auto;
+    padding: 1rem 4rem;
+  }
+
+  .button[data-disabled="true"] {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .cta-warning {
+    margin: 0;
+    font-size: 13px;
+    color: #f4d940;
+  }
+
+  @media (max-width: 640px) {
+    .contact-cta {
+      padding: 28px;
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  }
+</style>

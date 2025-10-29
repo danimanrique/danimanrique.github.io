@@ -1,0 +1,107 @@
+---
+import p1Img from "../assets/proyectos/p1.png";
+import p2Img from "../assets/proyectos/p2.png";
+import p3Img from "../assets/proyectos/p3.png";
+import p4Img from "../assets/proyectos/p4.png";
+---
+
+<section id="works" class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Proyectos</h2>
+      <p>Una selección de trabajos recientes y proyectos en los que he participado.</p>
+    </div>
+    <div class="works-grid">
+      <article class="work-card">
+        <div class="work-image">
+          <img src={p4Img.src} alt="Project preview" loading="lazy" />
+        </div>
+        <div class="work-content">
+          <h3>Sistema de Monitoreo IoT</h3>
+          <p>Permite la administración y monitoreo de dispositivos IoT (específicamente dispositivos Ewon)</p>
+          <p><i>Proyecto Privado</i></p>
+        </div>
+      </article>
+      <article class="work-card">
+        <div class="work-image">
+          <img src={p2Img.src} alt="Project preview" loading="lazy" />
+        </div>
+        <div class="work-content">
+          <h3>Landing Page</h3>
+          <p>Página web personal diseñada para Alicia Susana Arias, escritora de literatura contemporánea.</p>
+          <a class="text-link" href="https://alicia-arias.com/" target="_blank">Ver sitio</a>
+        </div>
+      </article>
+      <article class="work-card">
+        <div class="work-image">
+          <img src={p1Img.src} alt="Project preview" loading="lazy" />
+        </div>
+        <div class="work-content">
+          <h3>Sistema de Gestión Interno</h3>
+          <p>Aplicación web para la gestión de procesos de obras públicas.</p>
+          <p><i>Proyecto Privado</i></p>
+        </div>
+      </article>
+      <article class="work-card">
+        <div class="work-image">
+          <img src={p3Img.src} alt="Project preview" loading="lazy" />
+        </div>
+        <div class="work-content">
+          <h3>Pomodoro Timer</h3>
+          <p>
+            Temporizador construido con Angular, diseñado para ayudarte a mantener el enfoque y mejorar tu
+            productividad.
+          </p>
+          <a class="text-link" href="https://kaleidoscopic-youtiao-799be5.netlify.app/" target="_blank">Ver sitio</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 24px;
+  }
+
+  .work-card {
+    border-radius: 24px;
+    overflow: hidden;
+    background: rgba(15, 24, 38, 0.85);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .work-image {
+    position: relative;
+  }
+
+  .work-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent, rgba(15, 24, 38, 0.6));
+  }
+
+  .work-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .work-content h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #e2e8f0;
+  }
+
+  .work-content p {
+    margin: 0;
+    color: #94a3b8;
+    line-height: 1.5;
+  }
+</style>
