@@ -4,6 +4,7 @@ import Badge from "../components/Badge.astro";
 import p1Img from "../assets/proyectos/p1.png";
 import p2Img from "../assets/proyectos/p2.png";
 import p3Img from "../assets/proyectos/p3.png";
+import p4Img from "../assets/proyectos/p4.png";
 ---
 
 <div class="page">
@@ -86,7 +87,7 @@ import p3Img from "../assets/proyectos/p3.png";
         </div>
         <article class="about-card">
           <p>
-            Soy desarrolladora Full Stack con foco en crear aplicaciones web modernas, escalables y fáciles de mantener.
+            Tengo más de 8 años de experiencia como desarrolladora Full Stack creando aplicaciones web modernas, escalables y fáciles de mantener.
             Disfruto participar en todo el proceso de desarrollo, desde el diseño y la arquitectura hasta la
             implementación y el despliegue.
           </p>
@@ -137,16 +138,16 @@ import p3Img from "../assets/proyectos/p3.png";
       <div class="container">
         <div class="section-header">
           <h2>Proyectos</h2>
-          <p>Una selección de trabajos recientes y prototipos favoritos.</p>
+          <p>Una selección de trabajos recientes y proyectos en los que he participado.</p>
         </div>
         <div class="works-grid">
           <article class="work-card">
             <div class="work-image">
-              <img src={p1Img.src} alt="Project preview" loading="lazy" />
+              <img src={p4Img.src} alt="Project preview" loading="lazy" />
             </div>
             <div class="work-content">
-              <h3>Sistema de Gestión Interno</h3>
-              <p>Aplicación web para la gestión de procesos de obras públicas.</p>
+              <h3>Sistema de Monitoreo IoT</h3>
+              <p>Permite la administración y monitoreo de dispositivos IoT (específicamente dispositivos Ewon)</p>
               <p><i>Proyecto Privado</i></p>
             </div>
           </article>
@@ -160,6 +161,17 @@ import p3Img from "../assets/proyectos/p3.png";
               <a class="text-link" href="https://alicia-arias.com/" target="_blank">Ver sitio</a>
             </div>
           </article>
+          <article class="work-card">
+            <div class="work-image">
+              <img src={p1Img.src} alt="Project preview" loading="lazy" />
+            </div>
+            <div class="work-content">
+              <h3>Sistema de Gestión Interno</h3>
+              <p>Aplicación web para la gestión de procesos de obras públicas.</p>
+              <p><i>Proyecto Privado</i></p>
+            </div>
+          </article>
+
           <article class="work-card">
             <div class="work-image">
               <img src={p3Img.src} alt="Project preview" loading="lazy" />
@@ -535,34 +547,9 @@ import p3Img from "../assets/proyectos/p3.png";
     flex-wrap: wrap;
   }
 
-  .tag {
-    min-width: 80px;
-    padding: 16px 18px;
-    border-radius: 20px;
-    text-align: center;
-    font-weight: 600;
-    color: #0f172a;
-  }
-
-  .tag.html {
-    background: linear-gradient(180deg, #f97316, #fb923c);
-  }
-
-  .tag.css {
-    background: linear-gradient(180deg, #38bdf8, #60a5fa);
-  }
-
-  .tag.js {
-    background: linear-gradient(180deg, #facc15, #f97316);
-  }
-
-  .tag.react {
-    background: linear-gradient(180deg, #1dd9cd, #f4d940);
-  }
-
   .works-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     gap: 24px;
   }
 
