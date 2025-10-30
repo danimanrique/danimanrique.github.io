@@ -3,34 +3,48 @@ import profileImg from "../assets/profile.png";
 import Badge from "./Badge.astro";
 ---
 
-<section id="home" class="hero section">
-  <div class="container hero-grid">
-    <div class="hero-content">
-      <p class="eyebrow">Hola!</p>
-      <h1>
-        Soy <span>Daniela</span><br />
+<section id="home">
+  <div
+    class="mx-auto grid max-w-[1100px] items-center gap-12 px-6 pb-16 pt-20 max-[540px]:px-[18px] lg:grid-cols-[1fr_minmax(320px,340px)] lg:pb-20 lg:pt-28"
+  >
+    <div class="flex flex-col gap-6 text-center lg:text-left">
+      <p class="text-xs font-medium uppercase tracking-[0.3em] text-[#f4d940]">Hola!</p>
+      <h1 class="m-0 text-[clamp(32px,5vw,44px)] font-semibold leading-[1.1]">
+        Soy <span class="text-[#f4d940]">Daniela</span><br />
         Full Stack Developer
       </h1>
-      <p class="lead">
+      <p class="m-0 text-base leading-relaxed text-slate-200">
         Combino diseño y código para crear experiencias web claras y atractivas. Me apasiona construir productos que
         generen impacto real.
       </p>
-      <p class="lead">
+      <p class="m-0 text-base leading-relaxed text-slate-200">
         Cada desafío es una oportunidad para aprender y aportar una mirada creativa, resolutiva y adaptable a cada
         proyecto.
       </p>
-      <a class="text-link" href="#contact">Contame tu idea</a>
+      <a
+        class="group inline-flex items-center justify-center gap-2 text-sm font-medium text-[#f4d940] transition-transform hover:translate-x-[2px] lg:justify-start"
+        href="#contact"
+      >
+        Contame tu idea
+        <span
+          class="block h-[14px] w-[14px] rotate-45 border-r border-t border-current transition-transform group-hover:translate-x-[2px]"
+        ></span>
+      </a>
     </div>
-    <article class="profile-card">
+    <article
+      class="relative flex flex-col gap-4 rounded-[32px] border border-[rgba(148,163,184,0.15)] bg-[rgba(13,17,26,0.9)] p-7 shadow-[0_24px_40px_rgba(8,16,27,0.45)] after:pointer-events-none after:absolute after:inset-2 after:rounded-[28px] after:border after:border-[rgba(19,45,47,0.35)]"
+    >
       <Badge />
-      <div class="profile-image">
+      <div
+        class="mx-auto aspect-square w-[140px] overflow-hidden rounded-full border-[4px] border-[rgba(19,45,47,0.35)] bg-[radial-gradient(circle,rgba(19,45,47,0.25),transparent_65%)]"
+      >
         <img src={profileImg.src} alt="Daniela Manrique avatar" loading="lazy" />
       </div>
-      <h2 class="profile-name">Daniela Manrique</h2>
-      <p class="profile-role">Full Stack Developer</p>
-      <ul class="profile-details">
-        <li>
-          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+      <h2 class="m-0 text-center text-[22px] font-semibold">Daniela Manrique</h2>
+      <p class="m-0 text-center text-sm text-slate-400">Full Stack Developer</p>
+      <ul class="mt-2 list-none space-y-[10px] p-0 text-[13px] text-[#cbd5f5]">
+        <li class="flex items-center gap-2.5">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" class="text-[#f4d940]">
             <path
               fill="currentColor"
               d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"
@@ -38,8 +52,8 @@ import Badge from "./Badge.astro";
           </svg>
           Neuquén, Argentina
         </li>
-        <li>
-          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+        <li class="flex items-center gap-2.5">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" class="text-[#f4d940]">
             <path
               fill="currentColor"
               d="M21 4H3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1Zm-1 4.2-8 5-8-5V6l8 5 8-5v2.2Z"
@@ -48,9 +62,9 @@ import Badge from "./Badge.astro";
           daniela.manrique1422@gmail.com
         </li>
       </ul>
-      <div class="profile-actions">
+      <div class="mt-3 flex gap-3">
         <a
-          class="button ghost"
+          class="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-full border border-[rgba(148,163,184,0.3)] px-4 text-sm font-medium text-[#cbd5f5] transition-colors hover:border-[rgba(19,45,47,0.5)] hover:text-[#f4d940]"
           href="https://www.linkedin.com/in/daniela-andrea-manrique-282269138/"
           target="_blank"
         >
@@ -60,146 +74,39 @@ import Badge from "./Badge.astro";
             ></path>
           </svg>
         </a>
-        <a class="button ghost" href="https://github.com/danimanrique" target="_blank">
+        <a
+          class="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-full border border-[rgba(148,163,184,0.3)] px-4 text-sm font-medium text-[#cbd5f5] transition-colors hover:border-[rgba(19,45,47,0.5)] hover:text-[#f4d940]"
+          href="https://github.com/danimanrique"
+          target="_blank"
+        >
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
             <path
               d="M12 .5C5.65.5.5 5.74.5 12.2a11.7 11.7 0 0 0 7.66 11.1c.56.1.77-.25.77-.55v-2c-3.12.7-3.78-1.56-3.78-1.56-.5-1.3-1.22-1.65-1.22-1.65-1-.7.08-.68.08-.68 1.1.08 1.68 1.15 1.68 1.15.98 1.71 2.58 1.22 3.22.93.1-.73.38-1.22.68-1.5-2.5-.29-5.12-1.3-5.12-5.8 0-1.28.44-2.31 1.16-3.12-.12-.3-.5-1.53.12-3.18 0 0 .94-.31 3.1 1.19a10.4 10.4 0 0 1 5.64 0c2.14-1.5 3.08-1.19 3.08-1.19.62 1.65.24 2.88.12 3.18.74.81 1.16 1.84 1.16 3.12 0 4.52-2.62 5.5-5.12 5.79.4.36.74 1.04.74 2.1v3.11c0 .3.2.66.78.55a11.7 11.7 0 0 0 7.66-11.1C23.5 5.74 18.35.5 12 .5Z"
             ></path>
           </svg>
         </a>
-        <a class="button ghost" href="/CV-Daniela-Manrique.pdf" download>Descargar CV</a>
+        <a
+          class="inline-flex h-10 flex-[1.4] items-center justify-center gap-2 rounded-full border border-[rgba(148,163,184,0.3)] px-4 text-sm font-medium text-[#cbd5f5] transition-colors hover:border-[rgba(19,45,47,0.5)] hover:text-[#f4d940]"
+          href="/CV-Daniela-Manrique.pdf"
+          download
+        >
+          <svg
+            shape-rendering="geometricPrecision"
+            text-rendering="geometricPrecision"
+            image-rendering="optimizeQuality"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            viewBox="0 0 512 379.665"
+            height="18"
+            width="18"
+            fill="currentColor"
+            ><path
+              fill-rule="nonzero"
+              d="M153.764 119.045c-7.838.332-13.409 2.935-16.619 7.822-8.724 13.076 3.18 25.996 11.443 35.099 23.441 25.724 80.888 87.554 92.454 101.161 8.768 9.694 21.25 9.694 30.017 0 11.948-13.959 72.287-78.603 94.569-103.627 7.731-8.705 17.292-20.579 9.239-32.633-3.287-4.887-8.798-7.49-16.636-7.822H310.65V22.868C310.65 10.31 300.346 0 287.779 0h-63.544c-12.572 0-22.871 10.294-22.871 22.868v96.177h-47.6zM.764 249.22c-2.622-10.841 1.793-19.331 8.852-24.343a24.765 24.765 0 018.47-3.837c3.039-.738 6.211-.913 9.258-.477 8.585 1.232 16.409 6.775 19.028 17.617a668.79 668.79 0 014.56 20.164 1259.306 1259.306 0 013.611 17.721c4.696 23.707 8.168 38.568 16.924 45.976 9.269 7.843 26.798 10.549 60.388 10.549h254.297c31.012 0 47.192-2.965 55.706-10.661 8.206-7.418 11.414-21.904 15.564-44.131a1212.673 1212.673 0 013.628-18.808c1.371-6.788 2.877-13.766 4.586-20.81 2.619-10.839 10.438-16.377 19.023-17.617 3.02-.433 6.173-.256 9.212.474 3.071.739 5.998 2.042 8.519 3.838 7.05 5.006 11.457 13.474 8.855 24.293l-.011.047a517.342 517.342 0 00-4.181 18.987c-1.063 5.281-2.289 11.852-3.464 18.145l-.008.046c-6.124 32.802-11.141 55.308-27.956 71.112-16.565 15.573-42.513 22.16-89.473 22.16H131.857c-49.096 0-76.074-5.911-93.429-21.279-17.783-15.75-23.173-38.615-30.047-73.314-1.39-7.029-2.728-13.739-3.638-18.091-1.281-6.11-2.6-12.082-3.979-17.761z"
+            ></path></svg
+          > CV
+        </a>
       </div>
     </article>
   </div>
 </section>
-
-<style>
-  .hero {
-    padding-top: 100px;
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr minmax(280px, 320px);
-    gap: 48px;
-    align-items: center;
-  }
-
-  .hero-content {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .eyebrow {
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: #f4d940;
-    font-size: 12px;
-    margin: 0;
-  }
-
-  h1 {
-    font-size: clamp(32px, 5vw, 44px);
-    margin: 0;
-    line-height: 1.1;
-  }
-
-  h1 span {
-    color: #f4d940;
-  }
-
-  .profile-card {
-    padding: 32px 28px;
-    border-radius: 32px;
-    background: rgba(13, 17, 26, 0.9);
-    border: 1px solid rgba(148, 163, 184, 0.15);
-    box-shadow: 0 24px 40px rgba(8, 16, 27, 0.45);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    position: relative;
-  }
-
-  .profile-card::after {
-    content: "";
-    position: absolute;
-    inset: 8px;
-    border-radius: 28px;
-    border: 1px solid rgb(19, 45, 47, 0.35);
-    pointer-events: none;
-  }
-
-  .profile-image {
-    width: 140px;
-    align-self: center;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 4px solid rgb(19, 45, 47, 0.35);
-    background: radial-gradient(circle, rgb(19, 45, 47, 0.25), transparent 65%);
-  }
-
-  .profile-name {
-    text-align: center;
-    font-size: 22px;
-    font-weight: 600;
-    margin: 0;
-  }
-
-  .profile-role {
-    text-align: center;
-    color: #94a3b8;
-    font-size: 14px;
-    margin: 0;
-  }
-
-  .profile-details {
-    list-style: none;
-    margin: 8px 0 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    color: #cbd5f5;
-    font-size: 13px;
-  }
-
-  .profile-details li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .profile-details svg {
-    color: #f4d940;
-  }
-
-  .profile-actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 12px;
-  }
-
-  @media (max-width: 1024px) {
-    .hero-grid {
-      grid-template-columns: 1fr;
-      justify-items: center;
-    }
-
-    .hero-content {
-      text-align: center;
-      align-items: center;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .hero {
-      padding-top: 80px;
-    }
-
-    .profile-card {
-      width: 100%;
-    }
-  }
-</style>

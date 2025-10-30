@@ -4,63 +4,33 @@ const mailtoLink = contactEmail ? `mailto:${contactEmail}` : "#";
 const isLinkDisabled = !contactEmail;
 ---
 
-<section id="contact" class="section">
-  <div class="container">
-    <div class="contact-cta">
-      <div class="section-header">
-        <h2>Contacto</h2>
-        <p>¿Tenés una idea para un sitio o una aplicación web?</p>
-        <p>Podemos desarrollarla juntos con un enfoque práctico y orientado a resultados.</p>
+<section id="contact" class="py-16">
+  <div class="mx-auto max-w-[1100px] px-6 max-[540px]:px-[18px]">
+    <div
+      class="grid items-center gap-7 rounded-[28px] border border-[rgba(148,163,184,0.2)] bg-[rgba(15,24,38,0.9)] p-9 max-sm:p-7 lg:grid-cols-[1fr_auto]"
+    >
+      <div class="mb-0 flex flex-col gap-3 text-center lg:text-left">
+        <h2 class="m-0 text-2xl font-semibold text-slate-50 lg:text-[28px]">Contacto</h2>
+        <p class="m-0 text-sm text-slate-300">¿Tenés una idea para un sitio o una aplicación web?</p>
+        <p class="m-0 text-sm text-slate-300">
+          Podemos desarrollarla juntos con un enfoque práctico y orientado a resultados.
+        </p>
       </div>
-      <div class="cta-body">
-        <a class="button primary" href={mailtoLink} aria-disabled={isLinkDisabled} data-disabled={isLinkDisabled}>
+      <div class="flex flex-col items-center gap-4 lg:items-end">
+        <a
+          class="inline-flex items-center justify-center rounded-full border border-transparent bg-[#f4d940] px-8 py-3 text-sm font-semibold text-[#05292a] transition-shadow hover:shadow-[0_8px_20px_rgba(19,45,47,0.3)] data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-60 data-[disabled=true]:pointer-events-none"
+          href={mailtoLink}
+          aria-disabled={isLinkDisabled}
+          data-disabled={isLinkDisabled}
+        >
           Escribime
         </a>
         {isLinkDisabled && (
-          <p class="cta-warning">Configurá `PUBLIC_CONTACT_EMAIL` en tu archivo .env para habilitar el contacto.</p>
+          <p class="m-0 text-xs font-medium text-[#f4d940]">
+            Configurá `PUBLIC_CONTACT_EMAIL` en tu archivo .env para habilitar el contacto.
+          </p>
         )}
       </div>
     </div>
   </div>
 </section>
-
-<style>
-  .contact-cta {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 28px;
-    padding: 36px;
-    border-radius: 28px;
-    background: rgba(15, 24, 38, 0.9);
-    border: 1px solid rgba(148, 163, 184, 0.2);
-  }
-
-  .cta-body {
-    gap: 16px;
-  }
-
-  .button{
-    margin: auto;
-    padding: 1rem 4rem;
-  }
-
-  .button[data-disabled="true"] {
-    pointer-events: none;
-    opacity: 0.6;
-  }
-
-  .cta-warning {
-    margin: 0;
-    font-size: 13px;
-    color: #f4d940;
-  }
-
-  @media (max-width: 640px) {
-    .contact-cta {
-      padding: 28px;
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-  }
-</style>

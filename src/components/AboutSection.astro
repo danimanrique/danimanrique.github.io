@@ -1,48 +1,33 @@
 ---
 ---
 
-<section id="about" class="section">
-  <div class="container about-grid">
-    <div class="section-title">
-      <h2>Sobre mí</h2>
-      <div class="title-accent"></div>
+<section id="about" class="py-16">
+  <div
+    class="mx-auto grid max-w-[1100px] gap-8 px-6 max-[540px]:px-[18px] lg:grid-cols-[minmax(220px,260px)_1fr]"
+  >
+    <div class="flex flex-col gap-3">
+      <h2 class="m-0 text-2xl font-semibold text-slate-50 lg:text-[28px]">Sobre mí</h2>
+      <div class="h-1 w-20 rounded-full bg-gradient-to-r from-[#f4d940] to-[rgba(19,45,47,0)]"></div>
     </div>
-    <article class="about-card">
-      <p>
+    <article
+      class="flex flex-col gap-4 rounded-[24px] border border-[rgba(148,163,184,0.2)] bg-[rgba(15,24,38,0.85)] p-7 text-[#cbd5f5] leading-relaxed"
+    >
+      <p class="m-0">
         Tengo más de 8 años de experiencia como desarrolladora Full Stack creando aplicaciones web modernas, escalables y fáciles de mantener.
         Disfruto participar en todo el proceso de desarrollo, desde el diseño y la arquitectura hasta la implementación y el despliegue.
       </p>
-      <p>
+      <p class="m-0">
         Me interesa comprender a fondo las necesidades de cada proyecto para diseñar soluciones que aporten valor real. Busco resolver problemas complejos con un enfoque práctico y de calidad, y valoro especialmente los procesos colaborativos y las metodologías que impulsan la mejora continua.
       </p>
-      <a class="text-link" href="#works">Ver proyectos</a>
+      <a
+        class="group inline-flex items-center gap-2 text-sm font-medium text-[#f4d940] transition-transform hover:translate-x-[2px]"
+        href="#works"
+      >
+        Ver proyectos
+        <span
+          class="block h-[14px] w-[14px] rotate-45 border-r border-t border-current transition-transform group-hover:translate-x-[2px]"
+        ></span>
+      </a>
     </article>
   </div>
 </section>
-
-<style>
-  .about-grid {
-    display: grid;
-    grid-template-columns: minmax(220px, 260px) 1fr;
-    gap: 32px;
-    align-items: stretch;
-  }
-
-  .about-card {
-    padding: 28px;
-    border-radius: 24px;
-    background: rgba(15, 24, 38, 0.85);
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    color: #cbd5f5;
-    line-height: 1.6;
-  }
-
-  @media (max-width: 1024px) {
-    .about-grid {
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-  }
-</style>

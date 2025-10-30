@@ -6,7 +6,9 @@ import WorksSection from "./WorksSection.astro";
 import ContactSection from "./ContactSection.astro";
 ---
 
-<div class="page">
+<div
+  class="page relative min-h-screen bg-[radial-gradient(circle_at_20%_20%,rgba(33,211,194,0.08),transparent_55%),radial-gradient(circle_at_80%_30%,rgba(33,211,194,0.08),transparent_60%),linear-gradient(180deg,rgba(13,21,32,0.95),rgba(13,21,32,1))]"
+>
   <main>
     <HomeSection />
     <AboutSection />
@@ -17,14 +19,6 @@ import ContactSection from "./ContactSection.astro";
 </div>
 
 <style>
-  .page {
-    min-height: 100vh;
-    background: radial-gradient(circle at 20% 20%, rgba(33, 211, 194, 0.08), transparent 55%),
-      radial-gradient(circle at 80% 30%, rgba(33, 211, 194, 0.08), transparent 60%),
-      linear-gradient(180deg, rgba(13, 21, 32, 0.95), rgba(13, 21, 32, 1));
-    position: relative;
-  }
-
   .page::before {
     content: "";
     position: fixed;
@@ -38,112 +32,5 @@ import ContactSection from "./ContactSection.astro";
   .page > * {
     position: relative;
     z-index: 1;
-  }
-</style>
-
-<style is:global>
-  .section {
-    padding: 64px 0;
-  }
-
-  .lead {
-    color: #cbd5f5;
-    margin: 0;
-    line-height: 1.6;
-  }
-
-  .text-link {
-    color: #f4d940;
-    font-weight: 500;
-    font-size: 14px;
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .text-link::after {
-    content: "";
-    width: 14px;
-    height: 14px;
-    border-top: 1.5px solid currentColor;
-    border-right: 1.5px solid currentColor;
-    transform: rotate(45deg);
-    margin-top: 2px;
-  }
-
-  .button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    font-weight: 500;
-    font-size: 13px;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .button.primary {
-    background: #f4d940;
-    color: #05292a;
-  }
-
-  .button.primary:hover {
-    box-shadow: 0 8px 20px rgb(19, 45, 47, 0.3);
-  }
-
-  .button.ghost {
-    border-color: rgba(148, 163, 184, 0.3);
-    color: #cbd5f5;
-    fill: #cbd5f5;
-    background: transparent;
-  }
-
-  .button.ghost:hover {
-    border-color: rgb(19, 45, 47, 0.5);
-    color: #f4d940;
-    fill: #f4d940;
-  }
-
-  .section-title h2,
-  .section-header h2 {
-    font-size: 28px;
-    margin: 0;
-  }
-
-  .title-accent {
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, #f4d940, rgb(19, 45, 47, 0));
-    border-radius: 999px;
-    margin-top: 12px;
-  }
-
-  .section-header {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 32px;
-  }
-
-  .section-header p {
-    margin: 0;
-    color: #94a3b8;
-  }
-
-  @media (max-width: 768px) {
-    .section {
-      padding: 56px 0;
-    }
-  }
-
-  @media (max-width: 540px) {
-    .section-title h2,
-    .section-header h2 {
-      font-size: 24px;
-    }
   }
 </style>

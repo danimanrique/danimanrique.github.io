@@ -2,28 +2,19 @@
 import openToWorkImg from "../assets/open_to_work.png";
 ---
 
-<div class="badge">
-    <img class="punto-parpadeante" src={openToWorkImg.src} alt="" loading="lazy" />
+<div
+  class="flex items-center gap-2 self-start rounded-full bg-[rgba(64,244,194,0.12)] px-[14px] py-[6px] text-[12px] font-medium uppercase tracking-[0.04em] text-[#f4d940] m-auto"
+>
+  <img
+    class="mr-1 inline-block h-[16px] w-[16px] animate-[blink_2.2s_linear_infinite]"
+    src={openToWorkImg.src}
+    alt=""
+    loading="lazy"
+  />
   OPEN TO WORK
 </div>
 
 <style>
-  .badge {
-    margin: auto;
-    align-self: flex-start;
-    padding: 6px 14px;
-    border-radius: 999px;
-    background: rgba(64, 244, 194, 0.12);
-    color: #f4d940;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-items: center;
-  }
-  
   @keyframes blink {
     0%,
     100% {
@@ -32,17 +23,5 @@ import openToWorkImg from "../assets/open_to_work.png";
     50% {
       opacity: 0;
     }
-  }
-
-  .punto-parpadeante {
-    fill: #f4d940;
-    margin-right: 0.5rem;
-    display: inline-block;
-    animation: blink 2.2s linear infinite;
-  }
-
-  .punto-parpadeante-webkit {
-    -webkit-animation: blink 2.2s linear infinite;
-    animation: blink 2.2s linear infinite;
   }
 </style>
