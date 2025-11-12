@@ -3,6 +3,7 @@ import p1Img from "../assets/proyectos/p1.png";
 import p2Img from "../assets/proyectos/p2.png";
 import p3Img from "../assets/proyectos/p3.png";
 import p4Img from "../assets/proyectos/p4.png";
+import p5Img from "../assets/proyectos/p5.png";
 ---
 
 <section id="works" class="py-20">
@@ -77,6 +78,31 @@ import p4Img from "../assets/proyectos/p4.png";
         <div
           class="relative after:absolute after:inset-0 after:bg-[linear-gradient(180deg,transparent,rgba(15,24,38,0.6))]"
         >
+          <img src={p5Img.src} alt="Project preview" loading="lazy" />
+        </div>
+        <div class="flex flex-col gap-3 p-6">
+          <h3 class="m-0 text-xl font-semibold text-slate-100">Pila: app financiera</h3>
+          <p class="m-0 leading-relaxed text-slate-400">
+            Landing creada con Astro para presentar Pila: una app de finanzas personales 
+          </p>
+          <a
+            class="group inline-flex items-center gap-2 text-sm font-medium text-[#f4d940] transition-transform hover:translate-x-[2px]"
+            href="https://pila.ar/"
+            target="_blank"
+          >
+            Ver sitio
+            <span
+              class="block h-[14px] w-[14px] rotate-45 border-r border-t border-current transition-transform group-hover:translate-x-[2px]"
+            ></span>
+          </a>
+        </div>
+      </article>
+      <article
+        class="grid overflow-hidden rounded-[24px] border border-[rgba(148,163,184,0.2)] bg-[rgba(15,24,38,0.85)]"
+      >
+        <div
+          class="relative after:absolute after:inset-0 after:bg-[linear-gradient(180deg,transparent,rgba(15,24,38,0.6))]"
+        >
           <img src={p3Img.src} alt="Project preview" loading="lazy" />
         </div>
         <div class="flex flex-col gap-3 p-6">
@@ -97,6 +123,7 @@ import p4Img from "../assets/proyectos/p4.png";
           </a>
         </div>
       </article>
+      
     </div>
   </div>
 </section>
