@@ -11,11 +11,21 @@ interface Proyecto {
   private?: boolean;
 }
 
-const proyectos = (await getCollection("proyectos")).sort((a, b) => {
+const proyectosCollection = (await getCollection("proyectos")).sort((a, b) => {
   if (a.data.order < b.data.order) return -1;
   if (a.data.order > b.data.order) return 1;
   return 0;
 });
+
+const proyectos = await Promise.all(
+  proyectosCollection.map(async (entry) => {
+    const { Content } = await entry.render();
+    return {
+      ...entry,
+      Content,
+    };
+  }),
+);
 ---
 
 <section id="works" class="py-20">
@@ -34,6 +44,7 @@ const proyectos = (await getCollection("proyectos")).sort((a, b) => {
         proyectos.map((entry: any, index: number) => {
           const proyecto: Proyecto = (entry && entry.data) ? entry.data : entry;
           const { images, title, description, link, private: isPrivate } = proyecto;
+          const Content = entry?.Content;
           return (
             <article class="grid overflow-hidden rounded-[24px] border border-[rgba(148,163,184,0.2)] bg-[rgba(15,24,38,0.85)]">
               <div class="relative after:absolute after:inset-0 after:bg-[linear-gradient(180deg,transparent,rgba(15,24,38,0.6))]">
@@ -65,14 +76,24 @@ const proyectos = (await getCollection("proyectos")).sort((a, b) => {
                   )}
                 </div>
               </div>
+              {Content ? (
+                <div class="hidden">
+                  <div data-project-body={index} class="project-body">
+                    <Content />
+                  </div>
+                </div>
+              ) : null}
             </article>
           );
         })
       }
     </div>
   </div>
-  <div id="proyectos-data" data-proyectos={JSON.stringify(proyectos.map((p: any) => (p && p.data) ? p.data : p))} class="hidden"></div>
-  <div id="proyectos-data" data-proyectos={JSON.stringify(proyectos)} class="hidden"></div>
+  <div
+    id="proyectos-data"
+    data-proyectos={JSON.stringify(proyectos.map((p: any) => (p && p.data) ? p.data : p))}
+    class="hidden"
+  ></div>
 
   <div
     id="project-modal"
@@ -102,7 +123,7 @@ const proyectos = (await getCollection("proyectos")).sort((a, b) => {
             <p class="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4d940]">Detalle</p>
             <h3 data-field="title" class="m-0 text-2xl font-semibold text-slate-50"></h3>
           </div>
-          <p data-field="description" class="m-0 text-sm leading-relaxed text-slate-300"></p>
+          <div data-field="body" class="m-0 text-sm leading-relaxed text-slate-300 space-y-3"></div>
           <div class="flex flex-wrap gap-2" data-field="tags"></div>
           <div class="flex flex-wrap gap-2 text-sm text-slate-300" data-field="links"></div>
         </div>
@@ -120,10 +141,11 @@ const proyectos = (await getCollection("proyectos")).sort((a, b) => {
   const modal = document.getElementById("project-modal");
   const closeBtn = document.getElementById("close-project-modal");
   const proyectosData = datasetEl ? JSON.parse(datasetEl.dataset.proyectos || "[]") : [];
+  const bodySources = document.querySelectorAll("[data-project-body]");
 
   const fields = {
     title: modal?.querySelector('[data-field="title"]'),
-    description: modal?.querySelector('[data-field="description"]'),
+    body: modal?.querySelector('[data-field="body"]'),
     hero: modal?.querySelector('[data-field="hero"]'),
     tools: modal?.querySelector('[data-field="tools"]'),
     tags: modal?.querySelector('[data-field="tags"]'),
@@ -144,7 +166,14 @@ const proyectos = (await getCollection("proyectos")).sort((a, b) => {
       if (!modal || !project) return;
 
       if (fields.title) fields.title.textContent = project.title || "";
-      if (fields.description) fields.description.textContent = project.longDescription || project.description || "";
+      if (fields.body) {
+        const bodyFromMarkdown = bodySources?.[idx];
+        if (bodyFromMarkdown?.innerHTML) {
+          fields.body.innerHTML = bodyFromMarkdown.innerHTML;
+        } else {
+          fields.body.textContent = project.longDescription || project.description || "";
+        }
+      }
       if (fields.hero && project.images.length) {
         fields.hero.src = project.images[0];
       }
