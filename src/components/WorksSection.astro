@@ -1,67 +1,21 @@
 ---
-import p1Img from "../assets/proyectos/p1.png";
-import p2Img from "../assets/proyectos/p2.png";
-import p3Img from "../assets/proyectos/p3.png";
-import p4Img from "../assets/proyectos/p4.png";
-import p5Img from "../assets/proyectos/p5.png";
+import { getCollection } from "astro:content";
 
-const proyectos = [
-  {
-    title: "Sistema de Monitoreo IoT",
-    description:
-      "Permite la administración y monitoreo de dispositivos IoT",
-    longDescription:
-      "Implementé el panel web para monitorear dispositivos Ewon, definiendo arquitectura front/back, consumo de API de terceros provista por el cliente y exportación de datos en plantilla Excel a partir de un script en Python.",
-    images: [p4Img.src],
-    tools: ["Angular", "RxJS", "NestJS", "Node.js", "MySQL", "Python"],
-    link: null,
-    private: true,
-  },
-  {
-    title: "Landing Page",
-    description:
-      "Página web personal diseñada para Alicia Susana Arias, escritora de literatura contemporánea.",
-    longDescription:
-      "Maqueté una landing optimizada para autora independiente: estructura SEO, carga rápida y diseño limpio alineado a su identidad. Incluí un flujo de contacto directo a partir de un formulario.",
-    images: [p2Img.src],
-    tools: ["Astro", "TailwindCSS", "Google Analytics"],
-    link: "https://alicia-arias.com/",
-    private: false,
-  },
-  {
-    title: "Sistema de Gestión Interno",
-    description: "Aplicación web para la gestión de procesos de obras públicas.",
-    longDescription:
-      "Participé en el desarrollo de un sistema para optimizar la gestión de proyectos de obras públicas, incluyendo módulos para seguimiento de avances, reportes y administración de recursos.",
-    images: [p1Img.src],
-    tools: ["Angular", "PrimeNG", "NestJS", "MySQL", "JWT", "Agile", "Jira"],
-    link: null,
-    private: true,
-  },
-  {
-    title: "Pila: app financiera",
-    description:
-      "Landing creada con Astro para presentar Pila: una app de finanzas personales ",
-    longDescription:
-      "Construí la landing de lanzamiento de Pila con foco en divulgación del producto, captación de usuarios y optimización SEO. Implementé un diseño moderno y responsivo, asegurando una experiencia fluida en todos los dispositivos.",
-    images: [p5Img.src],
-    tools: ["Astro", "TypeScript", "Analytics"],
-    link: "https://pila.ar/",
-    private: false,
-  },
-  {
-    title: "Pomodoro Timer",
-    description:
-      "Temporizador construido con Angular, diseñado para ayudarte a mantener el enfoque y mejorar tu productividad.",
-    longDescription:
-      "Realicé un temporizador configurable con persistencia local, sonidos y métricas simples por sesión. Ideal para estudiantes y profesionales que buscan optimizar su tiempo de trabajo utilizando la técnica Pomodoro.",
-    images: [p3Img.src],
-    tools: ["Angular", "TypeScript", "PrimeNG", "Netlify"],
-    link: "https://kaleidoscopic-youtiao-799be5.netlify.app/",
-    private: false,
-  },
-];
+interface Proyecto {
+  order: number;
+  title: string;
+  description: string;
+  images: string[];
+  tools: string[];
+  link?: string;
+  private?: boolean;
+}
 
+const proyectos = (await getCollection("proyectos")).sort((a, b) => {
+  if (a.data.order < b.data.order) return -1;
+  if (a.data.order > b.data.order) return 1;
+  return 0;
+});
 ---
 
 <section id="works" class="py-20">
@@ -69,55 +23,55 @@ const proyectos = [
     <div class="mb-10 flex flex-col gap-3 text-center lg:text-left">
       <h2 class="m-0 text-2xl font-semibold text-slate-50 lg:text-[28px]">Proyectos</h2>
       <p class="m-0 text-sm text-slate-400">
-        Una selección de trabajos recientes y proyectos en los que he participado.
+        Una selección de trabajos recientes y proyectos en los que he participado. Si querés ver más, no dudes en
+        visitar mi perfil en <a href="https://github.com/danimanrique" target="_blank" class="text-[#9de1d4] underline"
+          >Github</a
+        >.
       </p>
     </div>
     <div class="grid grid-cols-[repeat(auto-fit,minmax(360px,1fr))] gap-6">
       {
-        proyectos.map((proyecto, index) => (
-          <article
-            class="grid overflow-hidden rounded-[24px] border border-[rgba(148,163,184,0.2)] bg-[rgba(15,24,38,0.85)]"
-          >
-            <div
-              class="relative after:absolute after:inset-0 after:bg-[linear-gradient(180deg,transparent,rgba(15,24,38,0.6))]"
-            >
-              <img src={proyecto.images[0]} alt="Project preview" loading="lazy" />
-            </div>
-            <div class="flex flex-col gap-3 p-6">
-              <h3 class="m-0 text-xl font-semibold text-slate-100">{proyecto.title}</h3>
-              <p class="m-0 leading-relaxed text-slate-400">{proyecto.description}</p>
-              <div class="flex flex-wrap items-center gap-3">
-                <button
-                  class="cursor-pointer inline-flex items-center gap-2 rounded-full border border-[rgba(244,217,64,0.4)] bg-[rgba(244,217,64,0.08)] px-4 py-[10px] text-sm font-semibold text-[#f4d940] transition hover:translate-x-[1px] hover:border-[rgba(244,217,64,0.7)]"
-                  type="button"
-                  data-open-project={index}
-                >
-                  Ver detalle
-                  <span class="block h-[12px] w-[12px] rotate-45 border-r border-t border-current"></span>
-                </button>
-                {proyecto.private ? (
-                  <span class="text-sm italic text-slate-400">Proyecto privado</span>
-                ) : (
-                  <a
-                    class="inline-flex items-center gap-2 rounded-full border border-[rgba(157,225,212,0.45)] bg-[rgba(157,225,212,0.08)] px-4 py-[10px] text-sm font-semibold text-[#9de1d4] transition hover:translate-x-[1px] hover:border-[rgba(157,225,212,0.7)]"
-                    href={proyecto.link}
-                    target="_blank"
-                  >
-                    Ver sitio
-                    <span
-                      class="block h-[14px] w-[14px] rotate-45 border-r border-t border-current transition-transform group-hover:translate-x-[2px]"
-                    ></span>
-                  </a>
-                )}
+        proyectos.map((entry: any, index: number) => {
+          const proyecto: Proyecto = (entry && entry.data) ? entry.data : entry;
+          const { images, title, description, link, private: isPrivate } = proyecto;
+          return (
+            <article class="grid overflow-hidden rounded-[24px] border border-[rgba(148,163,184,0.2)] bg-[rgba(15,24,38,0.85)]">
+              <div class="relative after:absolute after:inset-0 after:bg-[linear-gradient(180deg,transparent,rgba(15,24,38,0.6))]">
+                <img src={images[0]} alt="Project preview" loading="lazy" />
               </div>
-            </div>
-          </article>
-        ))
+              <div class="flex flex-col gap-3 p-6">
+                <h3 class="m-0 text-xl font-semibold text-slate-100">{title}</h3>
+                <p class="m-0 leading-relaxed text-slate-400">{description}</p>
+                <div class="flex flex-wrap items-center gap-3">
+                  <button
+                    class="cursor-pointer inline-flex items-center gap-2 rounded-full border border-[rgba(244,217,64,0.4)] bg-[rgba(244,217,64,0.08)] px-4 py-[10px] text-sm font-semibold text-[#f4d940] transition hover:translate-x-[1px] hover:border-[rgba(244,217,64,0.7)]"
+                    type="button"
+                    data-open-project={index}
+                  >
+                    Ver detalle
+                    <span class="block h-[12px] w-[12px] rotate-45 border-r border-t border-current" />
+                  </button>
+                  {isPrivate ? (
+                    <span class="text-sm italic text-slate-400">Proyecto privado</span>
+                  ) : (
+                    <a
+                      class="inline-flex items-center gap-2 rounded-full border border-[rgba(157,225,212,0.45)] bg-[rgba(157,225,212,0.08)] px-4 py-[10px] text-sm font-semibold text-[#9de1d4] transition hover:translate-x-[1px] hover:border-[rgba(157,225,212,0.7)]"
+                      href={link}
+                      target="_blank"
+                    >
+                      Ver sitio
+                      <span class="block h-[14px] w-[14px] rotate-45 border-r border-t border-current transition-transform group-hover:translate-x-[2px]" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          );
+        })
       }
-      
     </div>
   </div>
-
+  <div id="proyectos-data" data-proyectos={JSON.stringify(proyectos.map((p: any) => (p && p.data) ? p.data : p))} class="hidden"></div>
   <div id="proyectos-data" data-proyectos={JSON.stringify(proyectos)} class="hidden"></div>
 
   <div
@@ -139,14 +93,9 @@ const proyectos = [
       </button>
       <div class="grid grid-cols-1 gap-0 lg:grid-cols-[1.1fr_0.9fr]">
         <div class="relative min-h-[260px] bg-[rgba(16,24,38,0.6)]">
-          <img
-            data-field="hero"
-            src=""
-            alt="Vista del proyecto"
-            class="h-full w-full object-cover"
-            loading="lazy"
-          />
-          <div class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[rgba(13,21,32,0.95)] to-transparent"></div>
+          <img data-field="hero" src="" alt="Vista del proyecto" class="h-full w-full object-cover" loading="lazy" />
+          <div class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[rgba(13,21,32,0.95)] to-transparent">
+          </div>
         </div>
         <div class="flex flex-col gap-4 p-8">
           <div class="flex flex-col gap-2">
@@ -159,13 +108,8 @@ const proyectos = [
         </div>
       </div>
       <div class="border-t border-[rgba(148,163,184,0.18)] bg-[rgba(12,20,30,0.9)] p-6">
-        <p class="mb-3 mt-0 text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">
-          Stack y herramientas
-        </p>
-        <ul
-          data-field="tools"
-          class="m-0 flex flex-wrap gap-2 p-0 text-[12px] text-slate-200"
-        ></ul>
+        <p class="mb-3 mt-0 text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">Stack y herramientas</p>
+        <ul data-field="tools" class="m-0 flex flex-wrap gap-2 p-0 text-[12px] text-slate-200"></ul>
       </div>
     </div>
   </div>
@@ -207,27 +151,26 @@ const proyectos = [
 
       if (fields.tools) {
         fields.tools.innerHTML = (project.tools || [])
-          .map(
-            (tool) =>
-              `<li class="rounded-full bg-[rgba(244,217,64,0.08)] px-3 py-1 text-[#f4d940]">${tool}</li>`
-          )
+          .map((tool) => `<li class="rounded-full bg-[rgba(244,217,64,0.08)] px-3 py-1 text-[#f4d940]">${tool}</li>`)
           .join("");
       }
 
       if (fields.tags) {
-        fields.tags.innerHTML = (project.images.length || project.private !== undefined)
-          ? [
-              project.private
-                ? '<span class="rounded-full bg-[rgba(148,163,184,0.18)] px-3 py-1 text-xs text-slate-200">Proyecto privado</span>'
-                : "",
-            ].join("")
-          : "";
+        fields.tags.innerHTML =
+          project.images.length || project.private !== undefined
+            ? [
+                project.private
+                  ? '<span class="rounded-full bg-[rgba(148,163,184,0.18)] px-3 py-1 text-xs text-slate-200">Proyecto privado</span>'
+                  : "",
+              ].join("")
+            : "";
       }
 
       if (fields.links) {
-        fields.links.innerHTML = !project.private && project.link
-          ? `<a href="${project.link}" target="_blank" class="inline-flex items-center gap-2 rounded-full bg-[rgba(157,225,212,0.1)] px-3 py-1 text-[#9de1d4] hover:underline">Ver sitio</a>`
-          : "";
+        fields.links.innerHTML =
+          !project.private && project.link
+            ? `<a href="${project.link}" target="_blank" class="inline-flex items-center gap-2 rounded-full bg-[rgba(157,225,212,0.1)] px-3 py-1 text-[#9de1d4] hover:underline">Ver sitio</a>`
+            : "";
       }
 
       modal.classList.remove("hidden");
